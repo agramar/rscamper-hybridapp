@@ -1,0 +1,43 @@
+<ion-modal-view id="myPageView">
+  <ion-header-bar class="bar bar-header bar-energized">
+    <h1 class="title">메모</h1>
+
+    <button class="button button-clear" ng-click="closeBudgetList()"><i class="ion-android-arrow-back"></i></button>
+    <button class="button button-clear" ng-click="addBudgetList(budgetList)"><i class="ion-checkmark-round"></i></button>
+  </ion-header-bar>
+
+  <button class="button button-balanced button-fab button-fab-bottom-right" ng-click="addBudgetSet();">
+    <i class="ion-plus-round"></i>
+  </button>
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-light item-complex mypage-item" ng-repeat="budget in budgetList">
+        <div class="row" style="border-bottom: 1px solid #e0e0e0">
+          <div class="col col-10 detail-info-title" style="line-height: 3">구분</div>
+          <div class="col col-80"  style="line-height: 3">
+            <select ng-model="budget.priceType" ng-options="i.name for i in items" style="border: none">
+                <option value=""></option>
+            </select>
+          </div>
+          <div class="col col-10" ng-click="delAddPrice($index)">
+            <i class="ion-ios-trash" style="font-size: x-large; line-height: 1.5"></i>
+          </div>
+        </div>
+
+        <div class="row" style="border-bottom: 1px solid #e0e0e0; margin-top: 0px; padding-top: 5px">
+          <div class="col col-10 detail-info-title" style="line-height: 3">내용</div>
+          <div class="col col-80">
+            <input type="text" style="width: 100%; background-color: white !important;" ng-model="budget.content">
+          </div>
+        </div>
+
+        <div class="row" style="border-bottom: 1px solid #e0e0e0; margin-top: 0px; padding-top: 5px">
+          <div class="col col-10 detail-info-title" style="line-height: 3">금액</div>
+          <div class="col col-80">
+            <input type="number" style="width: 100%; background-color: white !important;" ng-model="budget.travelPrice">
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-modal-view>

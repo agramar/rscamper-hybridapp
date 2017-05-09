@@ -1,0 +1,21 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-energized">
+    <h1 class="title">여행 일정 소개</h1>
+
+    <button class="button button-clear" ng-click="modal.hide()"><i class="ion-android-arrow-back"></i></button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <div class="strapline">
+        소제목
+        <textarea id="straplineTitle" class="straplineText" style="resize: none; overflow: visible" ng-keyup="resize('straplineTitle')" ng-model ="strapline.title"></textarea>
+      </div>
+      <div class="strapline">
+        상세 소개글
+        <textarea id="straplineContent" class="straplineText" style="resize: none; overflow: visible" ng-keyup="resize('straplineContent')" ng-model="strapline.content"></textarea>
+      </div>
+      <button class="button button-full button-positive" ng-click="updateStrapline(strapline)">Create</button>
+    </div>
+  </ion-content>
+</ion-modal-view>
+

@@ -1,0 +1,112 @@
+<ion-view view-title="설정">
+
+  <!--오른쪽에 내비게이션 버튼 추가-->
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-android-more-vertical" ng-click="show($event)"></button>
+  </ion-nav-buttons>
+
+  <ion-content overflow-scroll="false">
+    <div class="list">
+      <a class="item item-icon-left">
+        <i class="icon ion-ionic"></i>UID
+        <span class="item-note">{{rootUser.userUid}}</span>
+      </a>
+      <a class="item item-icon-left">
+        <i class="icon ion-email"></i>이메일
+        <span class="item-note">{{rootUser.email}}</span>
+      </a>
+      <a class="item item-icon-left">
+        <i class="icon ion-person"></i>이름
+        <span class="item-note">{{rootUser.displayName}}</span>
+      </a>
+      <a class="item item-icon-left">
+        <i class="icon ion-android-call"></i>핸드폰번호
+        <span class="item-note">{{rootUser.phoneNumber}}</span>
+      </a>
+      <a class="item item-icon-left">
+        <i class="icon ion-at"></i>홈페이지주소
+        <span class="item-note">{{rootUser.websiteUrl}}</span>
+      </a>
+      <a class="item item-icon-left">
+        <i class="icon ion-calendar"></i>생년월일
+        <span class="item-note">{{rootUser.birthday | date:'MM/dd/yyyy'}}</span>
+      </a>
+      <a class="item item-icon-left">
+        <i class="icon ion-planet"></i>사는지역
+        <span class="item-note">{{rootUser.locationName}}</span>
+      </a>
+      <a class="item item-icon-left">
+        <i class="icon ion-happy"></i>가입일
+        <span class="item-note">{{rootUser.regDate}}</span>
+      </a>
+      <a class="item item-icon-left">
+        <i class="icon ion-document-text"></i>자기소개
+      </a>
+      <pre style="white-space: pre-wrap; width: 90%; margin: 5%; padding:10px; border: 1px solid black; ">{{rootUser.introduce}}</pre>
+    </div>
+  </ion-content>
+
+
+  <!-- 모달 폼 -->
+  <script id="modal/modProfileModal.html" type="text/ng-template">
+
+    <ion-modal-view>
+
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Modify Profile</h1>
+      </ion-header-bar>
+
+      <ion-content overflow-scroll="false">
+        <div class="list">
+
+          <label class="item item-input">
+            <span class="input-label">이름</span>
+            <input ng-model="profile.displayName" type="text">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">핸드폰번호</span>
+            <input ng-model="profile.phoneNumber" type="text">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">홈페이지주소</span>
+            <input type="text"ng-model="profile.websiteUrl">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">생년월일</span>
+            <input type="date" ng-model="profile.birthday" >
+          </label>
+
+          <label class="item item-input item-select">
+            <div class="input-label">
+              사는지역
+            </div>
+
+            <!-- TODO: 초기값 설정이 안됨-->
+            <select ng-options="location.locationNo as location.locationName for location in locations" ng-model="profile.locationNo">
+            </select>
+
+          </label>
+
+          <label for="introduce" class="item item-input">
+          <span class="input-label">자기소개</span><br>
+          </label>
+          <textarea id="introduce" ng-model="profile.introduce" rows="10" style="width: 90%; margin: 5%; border: 1px solid black; resize: none;"></textarea>
+        </div>
+
+        <div class="bar bar-footer">
+          <div class="tabs tabs-positive">
+            <a class="tab-item" ng-click="updateProfile(profile)">수정완료</a>
+            <a class="tab-item"  ng-click="closeModal()">취소</a>
+          </div>
+        </div>
+
+      </ion-content>
+
+    </ion-modal-view>
+  </script>
+
+</ion-view>
+

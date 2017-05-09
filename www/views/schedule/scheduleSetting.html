@@ -1,0 +1,78 @@
+<ion-modal-view id="myPageView">
+  <ion-header-bar class="bar bar-header bar-energized">
+    <h1 class="title">설정</h1>
+
+    <button class="button button-clear" ng-click="scheduleSettingModal.hide()"><i class="ion-close-round"></i></button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <ion-list>
+      <ion-item class="item-light item-complex mypage-item">
+        <div class="row" style="border-bottom: 1px solid #e0e0e0">
+          <div class="col col-20 detail-info-title" style="line-height: 3">제목</div>
+          <div class="col col-80"  style="line-height: 3">
+            <input id="tourTitle" type="text" ng-model="newSchedule.title" style="width: 100%; border-bottom: 1px solid #e0e0e0; background-color: white !important;" placeholder="여행 제목을 입력해주세요">
+          </div>
+        </div>
+
+        <div class="row" style="border-bottom: 1px solid #e0e0e0; margin-top: 0px; padding-top: 5px">
+          <div class="col col-20 detail-info-title" style="line-height: 3">출발일</div>
+          <div class="col col-80" >
+            <input id="sDate" type="date" ng-model="newSchedule.startDate" style="background-color: white !important;">
+          </div>
+        </div>
+
+        <div class="row" style="border-bottom: 1px solid #e0e0e0; margin-top: 0px; padding-top: 5px">
+          <div class="col col-20 detail-info-title" style="line-height: 3">도착일</div>
+          <div class="col col-80">
+            <input id="fDate" type="date" ng-model="newSchedule.finishDate" style="background-color: white !important;">
+          </div>
+        </div>
+        <div class="row" style="margin-top: 0px; padding-top: 5px">
+          <div class="col col-50 makeScheduleRadioBtn">
+            <ion-radio ng-model="newSchedule.isOpen" ng-value="1">공개</ion-radio>
+          </div>
+          <div class="col col-50 makeScheduleRadioBtn">
+            <ion-radio ng-model="newSchedule.isOpen" ng-value="2">비공개</ion-radio>
+          </div>
+        </div>
+        <button class="button button-full button-positive" ng-click="updateSchedule(newSchedule)">수정하기</button>
+      </ion-item>
+    </ion-list>
+    <!--<ion-list>
+      <ion-item class="item-light item-complex mypage-item">
+        <div class="row" style="border-bottom: 1px solid #e0e0e0">
+          <div class="col col-20" style="text-align: center">
+            제목
+          </div>
+          <div class="col col-80">
+            <input id="tourTitle" type="text" ng-model="newSchedule.title" placeholder="여행 제목을 입력해주세요">
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>-->
+   <!-- <div class="list">
+      <label class="item item-input">
+        <input id="tourTitle" type="text" ng-model="newSchedule.title" placeholder="여행 제목을 입력해주세요">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">출발일</span>
+        <input id="sDate" type="date" ng-model="newSchedule.startDate">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">도착일</span>
+        <input id="fDate" type="date" ng-model="newSchedule.finishDate">
+      </label>
+      <label class="item" style="padding: 0px !important;">
+        <div class="row" style="padding-left: 0px !important;">
+          <div class="col col-50 makeScheduleRadioBtn">
+            <ion-radio ng-model="newSchedule.isOpen" ng-value="1">공개</ion-radio>
+          </div>
+          <div class="col col-50 makeScheduleRadioBtn">
+            <ion-radio ng-model="newSchedule.isOpen" ng-value="2">비공개</ion-radio>
+          </div>
+        </div>
+      </label>
+      <button class="button button-full button-positive" ng-click="createSchedule(newSchedule)">수정하기</button>
+    </div>-->
+  </ion-content>
+</ion-modal-view>

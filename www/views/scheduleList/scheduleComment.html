@@ -1,0 +1,35 @@
+<ion-modal-view id="myPageView">
+  <ion-header-bar class="bar bar-header bar-energized">
+    <h1 class="title">댓글</h1>
+    <button class="button button-clear" ng-click="modal.hide()"><i class="ion-close-round"></i></button>
+  </ion-header-bar>
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-light item-complex mypage-item" ng-repeat="comment in commentList">
+        <div class="scheduleList-author-div">
+          <a class="item item-avatar scheduleList-author-a">
+            <img class="scheduleList-author-img" ng-src="{{comment.photoUrl}}">
+            <span class="scheduleList-author scheduleList-autor-time">{{comment.regDate | timesince : 'kr' }}</span>
+            <div class="scheduleList-autor-time" style="left: 93%" ng-if="comment.userUid == rootUser.userUid" ng-click="delComment(comment.commentNo)"><i class="ion-close-round"></i></div>
+            <div class="scheduleList-autor-time" style="left: 93%" ng-if="comment.userUid != rootUser.userUid" ng-click="toUserComment(comment)"><i class="ion-ios-undo-outline"></i></div>
+            <p class="scheduleList-author">{{comment.displayName}}</p>
+            <div class="item-text-wrap mypage-info-content">{{comment.content}}</div>
+          </a>
+        </div>
+      </ion-item>
+    </ion-list>
+
+
+  </ion-content>
+  <ion-footer-bar id="footerBar" class="bar-stable item-input-inset message-footer" keyboard-attach>
+    <div id="recentlyChat" style=" width: 100%;  position: absolute">
+    </div>
+    <label class="item-input-wrapper">
+      <textarea id="inputText" ng-keyup="resize()" ng-model="msgContent" value="" required minlength="1" maxlength="1500" msd-elastic style="resize: none; overflow: visible; font-size: 15px"></textarea>
+    </label>
+    <div class="footer-btn-wrap">
+      <button class="button button-icon icon ion-android-send footer-btn button-clear button-dark" ng-click="insertComment(msgContent)"
+              ng-disabled="!msgContent || msgContent === ''" style="color: black"></button>
+    </div>
+  </ion-footer-bar>
+</ion-modal-view>

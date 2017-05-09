@@ -1,0 +1,20 @@
+<ion-view id="myPageView" view-title="쪽지함">
+  <button class="button button-balanced button-fab button-fab-bottom-right" ng-click="messageOpen();">
+    <i class="icon ion-compose"></i>
+  </button>
+  <ion-content>
+    <ion-refresher on-refresh="load()" pulling-text="새로고침" spinner="crescent"></ion-refresher>
+    <ion-list class="message-ion-list">
+      <ion-item class="item-avatar item-icon-right message-item" ng-repeat="message in myMessageList" type="item-text-wrap" href="#/message/{{message.notesNo}}" >
+        <img class="message-img" ng-src="{{message.photoUrl}}">
+        <div class="message-infodiv">
+          <h2 class="message-title">{{message.title}}</h2>
+          <p class="message-displayName">{{message.displayName}}</p>
+          <p class="message-dateSent">{{message.dateSent | timesince : 'kr'}}</p>
+        </div>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="getMessageList()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>

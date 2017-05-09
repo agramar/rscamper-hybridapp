@@ -1,0 +1,58 @@
+<ion-view title="커뮤니티">
+
+  <!-- 우측 헤더 검색버튼 -->
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-search" ng-click="search($event)"></button>
+  </ion-nav-buttons>
+
+  <!-- 글쓰기 FAB -->
+  <button id="fab" class="button button-balanced button-fab button-fab-bottom-right" ng-click="openModal(3);">
+    <i class="icon ion-compose"></i>
+  </button>
+
+  <ion-content>
+
+    <!-- 위로 드래그시 새로고침 -->
+    <ion-refresher on-refresh="load()" pulling-text="새로고침" spinner="crescent"></ion-refresher>
+
+    <!-- CARD -->
+    <div class="list card stable-100-bg" ng-repeat="board in boardList | filter: {categoryNo:3}">
+      <!-- WRITER -->
+      <div class="item item-avatar">
+        <!-- writer img -->
+        <img ng-src="{{board.photoUrl}}">
+        <!-- writer displayName-->
+        <h2>{{board.displayName}}</h2>
+        <!-- regdate -->
+        <p>{{board.regDate | timesince: 'kr' }}</p>
+      </div>
+
+      <!-- TITLE -->
+      <div class="item item-divider">
+        <a>{{board.categoryName}}</a> <b>{{board.title}}</b>
+      </div>
+
+      <div class="item item-body" style="max-height:200px; overflow: hidden">
+        <div ng-bind-html="board.content"></div>
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="item tabs tabs-secondary tabs-icon-left">
+        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;" ng-click="likeBoard('{{board.boardNo}}', '{{$index}}')">
+          <i class="icon ion-thumbsup"></i> 좋아요 <b style="color: #0477f4;"> {{board.likeCnt}}</b>
+        </a>
+        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;" ui-sref="communityDetail({boardNo : board.boardNo})">
+          <i class="icon ion-chatbox"></i> 댓글 <b style="color: #0477f4;"> {{board.commentCnt}}</b>
+        </a>
+        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;" ui-sref="communityDetail({boardNo : board.boardNo})">
+          <i class="icon ion-document-text"></i> 상세보기
+        </a>
+      </div>
+
+    </div>
+
+    <!-- 무한 스크롤 -->
+    <ion-infinite-scroll on-infinite="getBoardList()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>

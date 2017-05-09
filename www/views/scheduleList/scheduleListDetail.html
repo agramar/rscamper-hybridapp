@@ -1,0 +1,106 @@
+<ion-view id="myPageView" view-title="상세 일정">
+  <button class="button button-balanced button-fab button-fab-bottom-right" ng-click="commentOpen();">
+    <i class="icon ion-compose"></i>
+  </button>
+  <ion-content>
+
+    <ion-list>
+      <ion-item class="item-light item-complex mypage-item">
+        <div class="item-content mypage-content mypage-item-div">
+          <img class="detail-img" ng-src="{{scheduleListDetail.cover.filePath}}" ng-if="scheduleListDetail.picture == 1"/>
+          <img class="detail-img" src="img/defaultscheduleImg.jpg" ng-if="scheduleListDetail.picture == 0">
+          <div class="detail-title">{{scheduleListDetail.title}}<br><br><span>{{scheduleListDetail.period}}</span></div>
+          <div class="detail-author-div">
+            <a class="item item-avatar mypage-author-a" href="#">
+              <img class="mypage-author-img" ng-src="{{scheduleListDetail.photoUrl}}">
+              <p class="mypage-author">{{scheduleListDetail.displayName}}</p>
+            </a>
+          </div>
+          <div class="detail-info">
+            <div ng-show="isLiked"><i class="ion-thumbsup" ng-click="recommendSchedule()"></i><br><span>추천</span></div>
+            <div ng-hide="isLiked"><i class="ion-thumbsup" style="color: red" ng-click="cancelRecommend()"></i><br><span>추천</span></div>
+            <div ng-show="isBookMark"><i class="ion-ios-download-outline" ng-click="addBookmark()"></i><br><span>북마크</span></div>
+            <div ng-hide="isBookMark"><i class="ion-ios-download-outline" style="color: red" ng-click="cancelBookMark()"></i><br><span>북마크</span></div>
+            <div ng-show="isCustomizing"><i class="ion-clipboard" ng-click="customizing()"></i><br><span>커스텀마이징</span></div>
+            <div ng-hide="isCustomizing"><i class="ion-clipboard" style="color : red" ng-click="cancelCustomizing()"></i><br><span>커스텀마이징</span></div>
+            <div ng-click="sharing()"><i class="ion-android-share-alt"></i><br><span>공유하기</span></div>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="item-light item-complex mypage-item" >
+        <div class="mypage-info">
+          <div ng-if="scheduleListDetail.strapline != ''">
+            <div class="item-divider detail-info-title">{{scheduleListDetail.strapline}}</div>
+            <div class="item-text-wrap mypage-info-content" style="border-bottom: 1px solid #e0e0e0">
+              <pre class="pre-text">{{scheduleListDetail.introduce}}</pre>
+            </div>
+          </div>
+          <div class="item-text-wrap detail-info-content" style="margin-top: 8px" ng-click="movePrice(scheduleListDetail.recordNo)">여행 예산<span> {{scheduleListDetail.totalPrice | currency : "" : 0}} 원<i class="ion-chevron-right"></i></span></div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <br>
+    <div class="detail-info">
+      <ion-list id="addSchedule" ng-repeat="week in period">
+        <div><div id="weekText" style="background-color: white; font-size: smaller">{{$index + 1}}일차</div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: smaller">{{week}}</span></div>
+
+        <section id="cd-timeline" class="cd-container">
+          <div ng-repeat="location in getScheduleLocation" >
+            <div class="cd-timeline-block" ng-if="week == location.departureDate">
+              <div class="cd-timeline-icon text-center energized">
+                <i class="ion-android-train timelineIcon"></i>
+              </div>
+              <div class="cd-timeline-content padding energized">
+                <h5 class="marginBottom0 marginTop0"><a style="text-decoration: none; font-weight: bold" ng-href="#/location/{{location.contentCode}}">{{location.title}}</a> <span ng-click="location.isScheduleDetail = !location.isScheduleDetail"><i class="ion-android-arrow-dropdown" style="font-size: x-large"></i></span></h5>
+                <p ng-show="location.isScheduleDetail" class="marginTop5 cd-author">{{location.detailDepartureDate | date:"hh:mma"}}</p>
+                <p ng-show="location.isScheduleDetail" class="timelineText"><a ng-href="#/location/{{location.contentCode}}"><img ng-src="{{location.imageUrl}}" style="width: 60%; height: 100px"></a></p>
+                <i ng-show="location.isScheduleDetail" class="ion-heart" style="color: red"></i> <span ng-show="location.isScheduleDetail">{{location.likeCount}} </span>
+              </div>
+              <ion-list ng-repeat="scheduleMemo in scheduleMemoList">
+                <ion-item class="item-light item-complex mypage-item" ng-if="scheduleMemo.contentId == location.contentCode" ng-click="moveMemoDetail(scheduleMemo.scheduleMemoNo)">
+                  <div class="mypage-info">
+                    <div class="item-divider detail-info-title" style="border-bottom: 1px solid #e0e0e0">
+                      <span ng-if="scheduleMemo.memoType == 1" style="color: #1bb556; font-weight: bold">메모</span>
+                      <span ng-if="scheduleMemo.memoType == 2" style="color: #3333b5; font-weight: bold">정보</span>
+                      {{scheduleMemo.title}}
+                    </div>
+                    <div class="item-text-wrap mypage-info-content" ng-bind-html="scheduleMemo.content">
+                    </div>
+                  </div>
+                  <div style="padding-top: 10px">
+                    <div id="location-priceList" ng-repeat="budget in scheduleMemo.price">
+                      <div class="item-text-wrap mypage-info-content" style="padding-left: 10px;">
+                        <i class="ion-cash"></i>
+                        <span ng-if="budget.priceType == 1">교통비</span>
+                        <span ng-if="budget.priceType == 2">음식</span>
+                        <span ng-if="budget.priceType == 3">오락, 엑티비티</span>
+                        <span ng-if="budget.priceType == 4">쇼핑</span>
+                        <span ng-if="budget.priceType == 5">숙박</span>
+                        <span ng-if="budget.priceType == 6">기타</span>
+                        |
+                        <span>{{budget.content}}</span> |
+                        <span>{{budget.travelPrice | currency : "" : 0}} 원</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" style="border-top: 1px solid #e0e0e0">
+                    <div class="col col-50 mypage-info-content" style="text-align: center" ng-if="scheduleMemo.isLike == 0" ng-click="recommedComment($event, scheduleMemo.scheduleMemoNo)">
+                      <i class="ion-thumbsup"></i> 추천 {{scheduleMemo.likeCnt}}
+                    </div>
+                    <div class="col col-50 mypage-info-content" style="text-align: center; color: #b56216"  ng-if="scheduleMemo.isLike == 1" ng-click="cancelCommentLike($event, scheduleMemo.scheduleMemoNo)">
+                      <i class="ion-thumbsup" style="color: #b56216"></i> <span style="color : #b56216">추천 {{scheduleMemo.likeCnt}}</span>
+                    </div>
+                    <div class="col col-50 mypage-info-content" style="text-align: center">
+                      <i class="ion-edit"></i> 댓글 {{scheduleMemo.commentCnt}}
+                    </div>
+                  </div>
+                </ion-item>
+              </ion-list>
+            </div>
+          </div>
+        </section>
+          </div>
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-view>

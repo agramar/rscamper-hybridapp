@@ -1,0 +1,13 @@
+<ion-view view-title="Account">
+  <ion-content overflow-scroll="false">
+    <button class="button button-block button-calm" ui-sref="signin" ng-if="userStatus == false">
+      로그인
+    </button>
+    <button class="button button-block button-calm" ui-sref="signup" ng-if="userStatus == false">
+      회원가입
+    </button>
+    <button class="button button-block button-calm" ui-sref="main.main" >
+      둘러보기
+    </button>
+  </ion-content>
+</ion-view>

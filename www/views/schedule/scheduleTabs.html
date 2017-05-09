@@ -1,0 +1,16 @@
+<ion-view>
+  <ion-tabs class="tabs-energized tabs-striped tabs-top custom-tabs">
+    <ion-tab title="나의 일정({{listCount}})" ui-sref="schedule.main">
+      <ion-nav-view name="s-tab"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="북마크" ui-sref="scheduleTab.bookMark">
+      <ion-nav-view name="bookMark-tab"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="포스트" ui-sref="scheduleTab.userPost">
+      <ion-nav-view name="userPost-tab"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="위시보드" ui-sref="scheduleTab.wishBoard">
+      <ion-nav-view name="userWishBoard-tab"></ion-nav-view>
+    </ion-tab>
+  </ion-tabs>
+</ion-view>

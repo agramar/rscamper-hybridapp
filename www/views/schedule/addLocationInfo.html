@@ -1,0 +1,17 @@
+<div class="modal image-modal transparent" on-swipe-down="closeModal()">
+  <ion-slide-box on-slide-changed="slideChanged(index)" active-slide="activeSlide">
+    <ion-slide class="scheduleSlide">
+
+      <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false"
+                  style="width: 100%; height: 100%;"
+                  delegate-handle="scrollHandle{{$index}}" >
+
+        <div style="width: 100%; height: 30%; background-color: white; position: absolute; top: 35%;" ng-keydown="qweqwe($event)">
+          <a class="button open-button" on-tap="openPickerView()" ng-keydown="qweqwe($event)">Open Picker View</a>
+          <div>{{ pickerOutput }}</div>
+        </div>
+
+      </ion-scroll>
+    </ion-slide>
+  </ion-slide-box>
+</div>

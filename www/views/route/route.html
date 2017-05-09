@@ -1,0 +1,62 @@
+<ion-view id="myPageView" view-title="루트 추천">
+  <button class="button button-balanced button-fab button-fab-bottom-right" ng-click="routeWriteFormOpen();">
+    <i class="icon ion-compose"></i>
+  </button>
+  <ion-content overflow-scroll="false">
+    <ion-refresher on-refresh="load()" pulling-text="새로고침" spinner="crescent"></ion-refresher>
+
+    <!-- CARD -->
+    <div class="list card stable-100-bg" ng-repeat="route in allRouteList">
+
+      <!-- WRITER -->
+      <div class="item item-avatar">
+        <!-- writer img -->
+        <img ng-src="{{route.photoUrl}}">
+        <!-- writer displayName-->
+        <h2>{{route.displayName}}</h2>
+        <!-- regdate -->
+        <p>{{route.regDate | timesince : 'kr' }}</p>
+      </div>
+      <!-- TITLE -->
+      <div class="item item-divider" style="line-height: 1.4; height: 100%; overflow: visible; white-space: normal">
+        <a>{{route.title}}</a><br>
+        <i class="ion-quote" style="font-size: 16px; color: #ffbbc8;"></i>
+        <b style="font-size: 11px" ng-repeat="routeDetail in route.routeDetailList" ng-show="$index == 0">{{routeDetail.place}}</b>
+        <b style="font-size: 11px" ng-repeat="routeDetail in route.routeDetailList" ng-show="$index >= 1"> - {{routeDetail.place}}</b>
+      </div>
+      <!--<div style="max-height:200px; overflow: hidden">-->
+      <div>
+        <section id="cd-timeline" class="cd-container">
+          <div id="line-div" class="dfsdf"></div>
+          <div ng-repeat="routeDetail in route.routeDetailList">
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-icon myPink">
+                <i class="ion-location timelineIcon myPink"></i>
+              </div>
+              <div class="cd-timeline-content stable">
+                <h5 class="marginBottom0 marginTop0" style="font-weight: bold; color: black;"><i class="ion-flag" style="color: #ffaec0;"></i> {{routeDetail.place}}</h5>
+                <pre class="timelinePreText">{{routeDetail.content}}</pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="item tabs tabs-secondary tabs-icon-left" style="background-color: #f0b840">
+        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;" ng-click="likeBoard('{{board.boardNo}}', '{{$index}}')">
+          <i class="icon ion-thumbsup"></i> 좋아요 <b style="color: #0477f4;"> {{board.likeCnt}}</b>
+        </a>
+        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;" ui-sref="communityDetail({boardNo : board.boardNo})">
+          <i class="icon ion-chatbox"></i> 댓글 <b style="color: #0477f4;"> {{board.commentCnt}}</b>
+        </a>
+        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;" ui-sref="communityDetail({boardNo : board.boardNo})">
+          <i class="icon ion-document-text"></i> 상세보기
+        </a>
+      </div>
+
+    </div>
+
+    <ion-infinite-scroll on-infinite="getRouteList()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>

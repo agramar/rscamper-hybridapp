@@ -1,0 +1,35 @@
+<ion-view view-title="{{roomInfo.chatRoomName}}">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-navicon" menu-toggle="right" ng-click="modal.show()">
+    </button>
+  </ion-nav-buttons>
+  <ion-content class="has-footer" id="msgContentView" delegate-handle="userMessageScroll" on-scroll="checkScroll()">
+    <div class="list" id="msgList">
+      <!--<ion-item style="padding: 0 !important;">
+        <div class="chat-bubble left" style="white-space:normal;">{{msg.sendId}}
+          <div class="message-detail"><span class="bold">aaaa</span>,
+            <span>asd</span></div>
+        </div>
+      </ion-item>-->
+      <!--<ion-item style="padding: 0 !important;">
+        <div class="chat-bubble right">asdasdsad
+          <div class="message-detail"><span class="bold">aaaa</span>,
+            <span>asd</span></div>
+        </div>
+      </ion-item>-->
+    </div>
+  </ion-content>
+    <ion-footer-bar id="footerBar" class="bar-stable item-input-inset message-footer" keyboard-attach>
+      <div id="recentlyChat" style=" width: 100%;  position: absolute">
+      </div>
+      <label class="item-input-wrapper">
+        <textarea id="inputText" ng-keyup="resize()" ng-model="msgContent" value="" placeholder="Send a message..." required minlength="1" maxlength="1500" msd-elastic style="resize: none; overflow: visible; font-size: 15px"></textarea>
+  </label>
+  <div class="footer-btn-wrap">
+    <button class="button button-icon icon ion-image footer-btn button-clear button-dark" style="position: absolute; left: -90%; color: black" ng-click="putImg()" ng-show="putPhoto" ></button>
+    <button class="button button-icon icon ion-android-send footer-btn button-clear button-dark" ng-click="sendMsgText()"
+            ng-disabled="!msgContent || msgContent === ''" style="color: black"></button>
+    <!--<a ng-click="refreshScroll(true, 50)" ng-show="!scrollDown" style="padding-right: 15%; margin-top: 10%"><i class="ion-android-arrow-dropdown-circle" style="font-size: 30px"></i></a>-->
+  </div>
+  </ion-footer-bar>
+</ion-view>

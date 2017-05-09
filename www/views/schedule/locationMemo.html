@@ -1,0 +1,60 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-energized">
+    <h1 class="title">메모</h1>
+
+    <button class="button button-clear" ng-click="locationMemo.hide()"><i class="ion-android-arrow-back"></i></button>
+    <button class="button button-clear" ng-click="insertMemo()"><i class="ion-checkmark-round"></i></button>
+  </ion-header-bar>
+  <ion-content class="padding has-footer" scroll="true" id="iContent">
+    <div class="list" style="background-color: white !important;">
+
+      <label class="item item-input item-select" style="background-color: white !important;">
+        <div class="input-label">
+          타입
+        </div>
+        <select id="memoType">
+          <option selected value="1">메모</option>
+          <option value="2">정보</option>
+        </select>
+      </label>
+
+        <label class="item item-input" style="background-color: white !important;">
+          <input type="text" id="memoTitle" style="border-bottom: 1px solid #e0e0e0; background-color: white !important;" placeholder="제목을 입력하세요." ng-value="memoTItle">
+        </label>
+    </div>
+    <div id="edit-text" contenteditable="true" style="width: 100%; height: 300px; border: 1px solid #e0e0e0; white-space:normal;" ng-keyup="editTextBox()" ng-click="viewTextBox(this)"></div>
+
+    <div style="width: 100%; color: #b1b1b1; font-size: smaller">
+      <div>
+        <i class="ion-location" style="margin-top: 2%; font-size: larger"></i>
+        {{memoLocation.title}}
+      </div>
+      <div id="location-priceList" ng-repeat="budget in showBudgetList">
+        <i class="ion-cash"></i>
+        <span ng-if="budget.priceType == 1">교통비</span>
+        <span ng-if="budget.priceType == 2">음식</span>
+        <span ng-if="budget.priceType == 3">오락, 엑티비티</span>
+        <span ng-if="budget.priceType == 4">쇼핑</span>
+        <span ng-if="budget.priceType == 5">숙박</span>
+        <span ng-if="budget.priceType == 6">기타</span>
+        |
+        <span>{{budget.content}}</span> |
+        <span>{{budget.travelPrice | currency : "" : 0}} 원</span>
+        <span style="float: right; padding-right: 10px" ng-click="delPrice($index)"><i class="ion-close-round"></i></span>
+      </div>
+    </div>
+  </ion-content>
+  <ion-footer-bar align-title="left" class="bar-energized">
+    <div style="width: 100%; height: 100%">
+      <div class="memoBtn" style="width: 33%; text-align: center">
+        <button class="button button-clear" style="width: 100%; text-align: center" ng-click="qweqweqwe()"><i class="ion-camera"></i></button>
+      </div>
+      <div class="memoBtn" style="width: 33%; text-align: center">
+        <button class="button button-clear" style="width: 100%; text-align: center" ng-click="openGallary()"><i class="ion-image"></i></button>
+      </div>
+      <div class="memoBtn" style="width: 33%; text-align: center">
+        <button class="button button-clear" style="width: 100%; text-align: center" ng-click="setBudget()"><i class="ion-social-usd"></i></button>
+      </div>
+    </div>
+  </ion-footer-bar>
+</ion-modal-view>

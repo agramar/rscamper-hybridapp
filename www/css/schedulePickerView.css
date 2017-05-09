@@ -1,0 +1,189 @@
+
+
+.picker-view {
+  z-index: 9999;
+  position: absolute;
+  left: 0;
+  top : 35%;
+  text-align: center;
+  width: 100%;
+  width: 100vw;
+  height: 33.33%;
+  height: 33.33vh;
+  background-color: transparent;
+}
+.picker-view::-webkit-scrollbar, .picker-view *::-webkit-scrollbar {
+  display: none;
+}
+.picker-view .picker-accessory-bar {
+  display: flex;
+  position: relative;
+  background-color: white;
+  z-index: 3;
+  height: 20%;
+}
+.picker-view .picker-accessory-bar .picker-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-size: 15px;
+  color: rgba(128, 128, 128, 0.8);
+}
+.picker-view .picker-accessory-bar .button {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: #387ef5;
+}
+.picker-view .picker-accessory-bar .button:first-of-type {
+  left: 1%;
+}
+.picker-view .picker-accessory-bar .button:last-of-type {
+  right: 1%;
+}
+.picker-view .picker-content {
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  background-color: white;
+  height: 80%;
+  padding: 2.5% 5%;
+}
+.picker-view .picker-content .picker-scroll {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  font-size: 26px;
+  line-height: normal;
+  color: black;
+  border-style: solid;
+  border-top-width: 1vmin;
+  border-bottom-width: 1vmin;
+  border-color: transparent;
+}
+.picker-view .picker-content .picker-scroll .scroll {
+  min-height: 100%;
+}
+.picker-view .picker-content .picker-scroll .scroll div {
+  opacity: 0.15;
+}
+.picker-view .picker-content .picker-scroll .scroll div.selected {
+  opacity: 1;
+}
+.picker-view .picker-content .picker-scroll .scroll div.pre-select {
+  opacity: 0.3;
+}
+.picker-view .picker-content .picker-scroll:after {
+  content: '';
+  z-index: -1;
+  position: absolute;
+  top: 1vmin;
+  bottom: 1vmin;
+  border-radius: 4vmin;
+}
+.picker-view .picker-content .picker-scroll:first-of-type {
+  left: 0;
+  border-left-width: 1vmin;
+  border-right-width: 0.5vmin;
+  border-top-left-radius: 5vmin;
+  border-bottom-left-radius: 5vmin;
+}
+.picker-view .picker-content .picker-scroll:first-of-type:after {
+  left: 1vmin;
+  right: 0.5vmin;
+}
+.picker-view .picker-content .picker-scroll:last-of-type {
+  right: 0;
+  border-left-width: 0.5vmin;
+  border-right-width: 1vmin;
+  border-top-right-radius: 5vmin;
+  border-bottom-right-radius: 5vmin;
+}
+.picker-view .picker-content .picker-scroll:last-of-type:after {
+  left: 0.5vmin;
+  right: 1vmin;
+}
+.picker-view .picker-content .picker-scroll:not(:first-of-type):not(:last-of-type) {
+  border-left-width: 0.5vmin;
+  border-right-width: 0.5vmin;
+}
+.picker-view .picker-content .picker-scroll:not(:first-of-type):not(:last-of-type):after {
+  left: 0.5vmin;
+  right: 0.5vmin;
+}
+
+.picker-view-slidein {
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease-in;
+  animation-timing-function: ease-in;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  -webkit-animation-name: pickerViewSlidein;
+  animation-name: pickerViewSlidein;
+}
+
+@keyframes pickerViewSlidein {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@-webkit-keyframes pickerViewSlidein {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+  }
+}
+.picker-view-slideout {
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  -webkit-animation-name: pickerViewSlideout;
+  animation-name: pickerViewSlideout;
+}
+
+@keyframes pickerViewSlideout {
+  from {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+  }
+}
+@-webkit-keyframes pickerViewSlideout {
+  from {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translateY(100%);
+  }
+}

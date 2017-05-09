@@ -1,0 +1,33 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-energized">
+    <h1 class="title">여행 기본정보</h1>
+
+    <button class="button button-clear" ng-click="modal.hide()"><i class="ion-close-round"></i></button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+          <input id="tourTitle" type="text" ng-model="newSchedule.title" placeholder="여행 제목을 입력해주세요">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">출발일</span>
+        <input id="sDate" type="date" ng-model="newSchedule.startDate">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">도착일</span>
+        <input id="fDate" type="date" ng-model="newSchedule.finishDate">
+      </label>
+      <label class="item" style="padding: 0px !important;">
+        <div class="row" style="padding-left: 0px !important;">
+          <div class="col col-50 makeScheduleRadioBtn">
+            <ion-radio ng-model="newSchedule.isOpen" ng-value="1">공개</ion-radio>
+          </div>
+          <div class="col col-50 makeScheduleRadioBtn">
+            <ion-radio ng-model="newSchedule.isOpen" ng-value="2">비공개</ion-radio>
+          </div>
+        </div>
+      </label>
+      <button class="button button-full button-positive" ng-click="createSchedule(newSchedule)">Create</button>
+    </div>
+  </ion-content>
+</ion-modal-view>

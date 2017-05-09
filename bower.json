@@ -1,0 +1,21 @@
+{
+  "name": "HelloIonic",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.3.1",
+    "moment-timezone": "^0.5.7",
+    "highcharts": "highcharts-release#^5.0.0",
+    "highcharts-ng": "^0.0.13"
+  },
+  "dependencies": {
+    "ml-highcharts-ng": "^0.0.10",
+    "ng-cordova-oauth": "^0.2.10",
+    "angularfire": "^2.1.0",
+    "jquery": "^3.1.1",
+    "ionic-numberpicker": "^1.1.4",
+    "angular-contenteditable": "^0.3.8",
+    "jsSHA": "1.6.2",
+    "ngCordova": "^0.1.27-alpha",
+    "angular-sweetalert": "latest"
+  }
+}

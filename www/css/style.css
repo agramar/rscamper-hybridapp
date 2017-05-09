@@ -1,0 +1,508 @@
+/* Empty. Add your own CSS if you like */
+.menu .bar.bar-header.expanded {
+  background-image: url('../img/material-graphite.jpg');
+  background-size: 120%;
+  background-position: 0%;
+  transition: all .5s ease-in-out;
+}
+
+.menu.menu-left * {
+  font-weight: bold;
+}
+
+.item-radio input:checked ~ .item-content {
+  background: transparent;
+}
+
+.menu-open .ion-navicon {
+  transform: rotate(-360deg);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu-open .ion-navicon:before {
+  content: "\f2ca";
+}
+
+/* menu */
+.menuTag {
+  font-weight:normal;
+  color: #e6b500;
+  font-size:11px;
+  text-decoration: none;
+}
+.menuTag:hover {
+  text-decoration: underline;
+}
+
+
+/* tab */
+.custom-tabs>div a span {
+  color: white !important;
+  font-size: 11px !important;
+}
+
+/* main */
+.mainTab {
+  height: 20px;
+}
+.mainTab-span {
+  font-size: 12px;
+}
+#main-weather-div {
+  background-color: #444444;
+  padding: 8px;
+}
+#main-weather-div * {
+  text-align: center;
+}
+#temperature-text {
+  font-weight: normal;
+  color: white;
+  margin: 0;
+  margin-bottom: 5px;
+}
+.main-location-text {
+  font-size: 11px;
+  color: white;
+}
+.main-icon {
+  font-size: 16px;
+  color: white;
+}
+.main-list-div-title {
+  margin-left: 5px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.main-list-title-icon {
+  font-size: 16px;
+}
+.main-comment-list-div {
+  width: 100%;
+  overflow: hidden;
+  background-color: #ebcccc;
+}
+.main-message-list-div {
+  width: 100%;
+  overflow: hidden;
+  background-color: #c2d4dd;
+}
+.main-comment-list, .main-message-list {
+  width: 100%;
+  font-size: 11px;
+  padding: 3px 5px 0px 5px;
+  height: 20px !important;
+  min-height: 20px !important;
+  box-sizing: border-box;
+}
+#logout-div {
+  padding-top: 8px;
+  text-align: center;
+  background-color: #204d74;
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+}
+.my-tabs  > div {
+  height: 28px; !important;
+}
+.main-board-img {
+  height: 120px;
+}
+.main-board-info {
+  background-color: white;
+  padding: 5px 8px 10px 8px;
+  margin-top: -5px;
+  height: 66px;
+}
+.main-board-short-title {
+  font-weight: bold;
+  font-size: 12px;
+  margin: 0px;
+  height: 30px;
+  line-height: 30px;
+}
+.main-board-long-title {
+  font-weight: bold;
+  font-size: 12px;
+  margin: 0 0 5px 0;
+  height: 25px;
+  line-height: 110%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+}
+.main-board-author {
+  font-size: 11px;
+  color: dimgray;
+}
+
+
+/* tourInfo */
+#map {
+  width: 100%;
+  height: 60%;
+  position: fixed;
+}
+.scroll {
+  height: 100%;
+}
+#mapList {
+  /*max-height: 100%;*/
+  /*overflow: scroll;*/
+}
+.item-myactive {
+  background-color: lightgray !important;
+}
+.tourInfo-wrap-a {
+  margin-bottom: 8px;
+  background-color: white;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+.tourInfo-infodiv {
+  height: 80px;
+  padding-top: 5px;
+}
+.tourInfo-title {
+  font-weight: bold !important;
+  font-size: 15px !important;
+}
+.tourInfo-distance {
+  margin-top: 8px;
+  font-size: 12px !important;
+  color: #ff5391 !important;
+}
+.tourInfo-address {
+  font-size: 12px !important;
+}
+
+
+
+/* tourdetail */
+.myDetailIcon {
+  font-size: large;
+}
+.myDetailInfo {
+  padding: 16px;
+  white-space: normal;
+}
+.myDivider {
+  line-height: 32px !important;
+  /*background-color: rgba(255, 0, 102, 0.1);*/
+  background-color: #e6e6e6;
+}
+.image-list-thumb {
+  padding: 2px;
+  height: 150px;
+}
+.image-modal {
+  width: 100%; !important;
+  height: 100%;
+  top: 0 !important;
+  left: 0 !important;
+}
+.transparent {
+  background: rgba(0,0,0,0.7);
+}
+.slider {
+  width: 100%;
+  height: 100%;
+}
+.image {
+  width: 100%;
+  height: 600px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center, center;
+}
+
+
+/* myPage */
+#myPageView {
+  background-color: #e0e0e0;
+}
+.mypage-item {
+  margin: 10px 0px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+.mypage-item-div {
+  position: relative;
+}
+.mypage-content {
+  padding: 0px !important;
+}
+.mypage-img {
+  width: 100%;
+  height: 150px;
+  opacity: 0.85;
+}
+.mypage-title {
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+  padding: 0px 50px;
+  white-space: normal;
+  text-shadow: 1px 1px 5px #303030;
+}
+.mypage-author-div {
+  position: absolute;
+  top: 0px;
+}
+.mypage-author-a {
+  padding: 0 0 0 30px;
+  margin: 10px;
+  min-height: 25px !important;
+}
+.mypage-author {
+  color: white !important;
+  font-size: 11px !important;
+  line-height: 25px;
+  text-shadow: 1px 1px 5px #303030;
+}
+.mypage-author-img {
+  max-height: 25px !important;
+  max-width: 25px !important;
+  top: 0px !important;
+  left: 0px !important;
+}
+.mypage-info {
+  padding: 0 10px 10px 10px;
+}
+.mypage-info-title {
+  font-weight: bold !important;
+  font-size: 13px !important;
+  background-color: white !important;
+}
+.mypage-info-content {
+  font-size: 11px !important;
+  color: dimgray !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+}
+.mypage-delbtn {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  text-align: center;
+  border: none;
+  background-color: white;
+  left: 90%;
+  top: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 3px;
+}
+.mypage-delbtn-icon {
+  line-height: 20px;
+  color: #eeaa00;
+  font-size: 20px;
+}
+
+
+/* message */
+.message-wrap-div {
+  width: 90%;
+  height: 50%;
+  border-radius: 5px;
+  margin-left: 5%;
+  background-color: #e0e0e0;
+  position: absolute;
+  top: 25%;
+}
+.message-wrap-title-div {
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  width: 100%;
+  height: 9%;
+  font-size: large;
+  background-color: #ffc900;
+  padding-top: 2%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+.message-img {
+  max-width: 50px !important;
+  max-height: 50px !important;
+}
+.sendMessage-modal {
+  background: rgba(0,0,0,0.5);
+}
+#message-receiver-box {
+  display: inline-block;
+  width: 28.5%;
+  border-radius: 3px;
+  padding: 3px 5px;
+  box-sizing: border-box;
+}
+#message-title {
+  display: inline-block;
+  width: 70%;
+  border-radius: 3px;
+  padding: 3px 5px;
+  box-sizing: border-box;
+}
+#message-wrap-userlist-div {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 0 5px;
+  z-index: 99;
+  width: 100%;
+}
+#message-userlist-div {
+  width: 28.5%;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+}
+.message-userlist-li:hover {
+  background-color: #ffc900;
+  color: white;
+}
+#message-content-div {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 72%;
+}
+#message-content {
+  margin-top: 5px;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  padding: 5px;
+}
+#message-send-btn {
+  border-radius: 3px;
+  text-align: right;
+  margin-top: 5px;
+  font-size: 11px;
+  border-color: #ffc900 !important;
+  /*background-color: #e0e0e0;*/
+  background-color: white;
+  box-shadow: none;
+}
+#message-send-btn:active {
+  background-color: #ffc900;
+}
+
+
+/* message detail page */
+.message-detail-wrap-div {
+  margin: 10px 0;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  padding: 8px;
+  height: 70%;
+}
+.message-author-a {
+  border: none;
+  padding: 0 0 0 45px;
+  margin: 3%;
+  min-height: 35px !important;
+}
+.message-detail-title-div {
+  padding: 15px 0 10px 0;
+}
+.message-detail-content {
+  height: 90%;
+  padding-top: 10px;
+  font-size: 12px;
+  color: dimgray;
+}
+.message-item a {
+  margin-bottom: 8px;
+  background-color: white !important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  height: 96px !important;
+}
+
+.message-ion-list>div .message-item:nth-child(2n)>a {
+  /*background-color: #ffdde2 !important;*/
+  /*background-color: #FFFFFF !important;*/
+  background-color: #fbffe9 !important;
+}
+.message-ion-list>div .message-item:nth-child(2n + 1)>a {
+  background-color: #fff1c6 !important;
+}
+/*.message-item a:nth-child(2n) {*/
+  /*background-color: #ffbbc8 !important;*/
+/*}*/
+/*.message-item a:nth-child(2n+1) {*/
+  /*background-color: lightgray !important;*/
+/*}*/
+/*.message-item:nth-child(2n) {*/
+  /*background-color: #ffbbc8 !important;*/
+/*}*/
+/*.message-item:nth-child(2n + 1) {*/
+  /*background-color: lightgray !important;*/
+/*}*/
+.message-infodiv {
+  height: 80px;
+}
+.message-title {
+  font-size: 15px !important;
+}
+.message-dateSent {
+  margin-top: 8px;
+  font-size: 12px !important;
+  color: #666 !important;
+}
+.message-displayName {
+  font-size: 12px !important;
+}
+
+
+/* 팝업 */
+.popup-container {}
+.popup {
+  padding: 12px;
+  border-radius: 10px !important;
+}
+.popup-head {}
+.popup-title {
+  color: #575757;
+  font-size: 30px !important;
+  text-align: center;
+  font-weight: 600;
+  margin: 25px 0;
+  padding: 0;
+  line-height: 40px;
+}
+.popup-body {
+  color: #797979;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: center;
+  float: none;
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+}
+.popup-buttons .button {
+  background-color: #5dc2f1;
+  color: white;
+  border: none;
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: 500;
+  -webkit-border-radius: 4px;
+  border-radius: 3px !important;
+  margin: 26px 5px 0 5px;
+  cursor: pointer;
+}
+.popup-buttons .button.activated {
+  background-color: #007aff;
+}

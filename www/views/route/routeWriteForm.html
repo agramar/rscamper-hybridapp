@@ -1,0 +1,34 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-energized">
+    <h1 class="title">루트 추천 글 작성</h1>
+    <button class="button button-clear" ng-click="modal.hide()"><i class="ion-close"></i></button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <input id="routeInfo-title" type="text" ng-model="routeInfo.title" placeholder="글 제목을 입력해주세요">
+      </label>
+      <div ng-repeat="route in routeList">
+        <label class="item item-input">
+          <input id="routeInfo-place-{{$index}}" type="text" ng-model="route.place" placeholder="장소를 입력해주세요">
+        </label>
+        <label class="item item-input">
+          <textarea rows="7" id="routeInfo-content-{{$index}}" ng-model="route.content" placeholder="내용을 입력해주세요"></textarea>
+        </label>
+      </div>
+      <div style="width: 100%;">
+        <div class="row" style="padding: 5px 5px 0 5px;">
+          <div class="col col-50" style="padding: 0 4px 0 0;">
+            <button class="button button-full button-royal" ng-click="addRouteObj()">Add Place</button>
+          </div>
+          <div class="col col-50" style="padding: 0 0 0 4px;">
+            <button class="button button-full button-assertive" ng-click="removeRouteObj()">Remove Place</button>
+          </div>
+        </div>
+        <div class="row">
+          <button class="button button-full button-positive" ng-click="addRoute(routeInfo)">Create</button>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

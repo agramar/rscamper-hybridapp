@@ -1,0 +1,19 @@
+<div class="modal transparent" ng-click="closeModal()">
+  <ion-content scroll="false">
+    <div class="list" style="width: 60%; height: 100%; background-color: white; float: right; overflow-y: scroll">
+      <div class="item" style="background-color : yellow">
+        유저 정보
+      </div>
+      <div class="list" style="margin: 5px; ">
+        <a class="item item-thumbnail-left"  ng-repeat="userInfo in userInfoList" style="padding-bottom: 8px">
+          <img ng-src="{{userInfo.photoUrl}}">
+          <div style="height:80px;">
+            <h2>{{userInfo.displayName}}</h2>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </ion-content>
+
+</div>

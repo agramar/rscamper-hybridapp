@@ -1,0 +1,26 @@
+<ion-view title="청춘열차" id="myPageView">
+  <ion-content>
+    <ion-refresher on-refresh="load()" pulling-text="refresh" spinner="crescent"></ion-refresher>
+    <div style="height: 100%;">
+      <div class="row" ng-repeat="mainRoute in mainRouteList" ng-if="$index % 2 === 0">
+        <div class="col col-50" ng-if="$index < mainRouteList.length" ng-click="moveDetail(mainRouteList[$index].no, mainRouteList[$index].targetType)">
+          <img ng-src="{{mainRouteList[$index].coverImgUrl}}" class="main-board-img" width="100%"/>
+          <div class="main-board-info">
+            <p class="main-board-long-title" ng-if="mainRouteList[$index].title.length >= 15"> {{mainRouteList[$index].title}} </p>
+            <p class="main-board-short-title" ng-if="mainRouteList[$index].title.length < 15"> {{mainRouteList[$index].title}} </p>
+            <span class="main-board-author"> {{mainRouteList[$index].displayName}} </span>
+          </div>
+        </div>
+        <div class="col col-50" ng-if="$index + 1 < mainRouteList.length" ng-click="moveDetail(mainRouteList[$index+1].no, mainRouteList[$index+1].targetType)">
+          <img ng-src="{{mainRouteList[$index + 1].coverImgUrl}}" class="main-board-img" width="100%"/>
+          <div class="main-board-info">
+            <p class="main-board-long-title" ng-if="mainRouteList[$index+1].title.length >= 15"> {{mainRouteList[$index+1].title}} </p>
+            <p class="main-board-short-title" ng-if="mainRouteList[$index+1].title.length < 15"> {{mainRouteList[$index+1].title}} </p>
+            <span class="main-board-author"> {{mainRouteList[$index+1].displayName}} </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ion-infinite-scroll on-infinite="getBoardList()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>

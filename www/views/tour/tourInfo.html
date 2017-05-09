@@ -1,0 +1,17 @@
+<ion-view title="주변관광지" id="myPageView">
+  <ion-content>
+    <div id="map" data-tap-disabled="true"></div>
+    <ion-scroll delegate-handle="mapScroll" direction="y" style="height: 40%;">
+      <div id="mapList" class="list">
+        <a ng-repeat="map in mapList | orderBy : 'myDistance'" class="item item-thumbnail-left tourInfo-wrap-a" id="map-item-{{map.contentid}}" ng-href="#/location/{{map.contentid}}" style="padding-bottom: 8px;">
+          <img ng-src="{{map.firstimage}}">
+          <div class="tourInfo-infodiv">
+            <h2 class="tourInfo-title">{{map.title}}</h2>
+            <p class="tourInfo-address">{{map.addr1}}</p>
+            <p class="tourInfo-distance"><i class="ion-android-bicycle" style="color: #666; font-size: 18px;"></i> <span style="font-weight: bold; margin-right: 5px;">나와의 거리</span> {{map.myDistance}}km</p>
+          </div>
+        </a>
+      </div>
+    </ion-scroll>
+  </ion-content>
+</ion-view>

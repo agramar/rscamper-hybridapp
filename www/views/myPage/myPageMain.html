@@ -1,0 +1,31 @@
+<ion-view id="myPageView" view-title="{{rootUser.displayName}}님의 페이지">
+  <ion-content overflow-scroll="false">
+    <!-- 위로 드래그시 새로고침 -->
+    <ion-refresher on-refresh="load()" pulling-text="새로고침" spinner="crescent"></ion-refresher>
+
+    <ion-list>
+      <ion-item ng-repeat="bookMark in myBookMarkList" class="item-light item-complex mypage-item" ng-click="moveDetail(bookMark.no, bookMark.targetType)">
+        <div class="item-content mypage-content mypage-item-div">
+          <img class="mypage-img" ng-src="{{bookMark.coverImgUrl}}"/>
+          <div class="mypage-title">{{bookMark.title}}</div>
+          <div class="mypage-author-div">
+            <a class="item item-avatar mypage-author-a" href="#">
+              <img class="mypage-author-img" ng-src="{{bookMark.photoUrl}}">
+              <p class="mypage-author">{{bookMark.displayName}}</p>
+            </a>
+          </div>
+          <div class="mypage-delbtn" ng-click="deleteBookMark($event, bookMark.no, bookMark.targetType)"><i class="ion-trash-a mypage-delbtn-icon" style="color: #e6b500;"></i></div>
+          <div class="mypage-info" ng-if="bookMark.targetType == 3 && (bookMark.strapline != '' || bookMark.introduce != '')">
+            <div class="item-divider mypage-info-title">{{bookMark.strapline}}</div>
+            <div class="item-text-wrap mypage-info-content">
+              <pre class="pre-text">{{bookMark.introduce}}</pre>
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <!-- 무한 스크롤 -->
+    <ion-infinite-scroll on-infinite="getBookMarkList()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>

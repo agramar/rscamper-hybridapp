@@ -1,0 +1,142 @@
+<ion-view title="커뮤니티">
+  <ion-tabs class="tabs-energized tabs-striped tabs-top custom-tabs">
+    <ion-tab title="전체" ui-sref="community.main">
+      <ion-nav-view name="community-main-tab"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="자유" ui-sref="community.free({categoryNo : 1})">
+      <ion-nav-view name="community-free-tab"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="여행기" ui-sref="community.tourDiary({categoryNo : 2})">
+      <ion-nav-view name="community-tourDiary-tab"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="정보" ui-sref="community.information({categoryNo : 3})">
+      <ion-nav-view name="community-information-tab"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="리뷰" ui-sref="community.review({categoryNo : 4})">
+      <ion-nav-view name="community-review-tab"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="질문" ui-sref="community.qna({categoryNo : 5})">
+      <ion-nav-view name="community-qna-tab"></ion-nav-view>
+    </ion-tab>
+  </ion-tabs>
+</ion-view>
+
+
+<!-- 글쓰기 폼 모달  -->
+<script id="community/writeFormModal.html" type="text/ng-template">
+  <ion-modal-view>
+
+    <ion-header-bar class="bar bar-header bar-energized">
+      <h1 class="title">글작성</h1>
+      <div class="buttons buttons-right header-item">
+        <span class="right-buttons">
+          <button class="button button-icon button-clear ion-images" ng-click="addPicture();">
+          </button>
+        </span>
+      </div>
+    </ion-header-bar>
+
+    <ion-content overflow-scroll="false">
+      <div class="list">
+
+        <label class="item item-input">
+          <span class="input-label">작성자</span>
+          <input type="text" ng-model="writeBoard.displayName" ng-value="rootUser.displayName" readonly>
+        </label>
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            카테고리
+          </div>
+          <select ng-model="writeBoard.categoryNo" ng-options="category.categoryNo as category.categoryName for category in categories" ng-required="true">
+            <option value="">선택해주세요</option>
+          </select>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">글제목</span>
+          <input ng-model="writeBoard.title" type="text">
+        </label>
+
+        <div strip-br="true" strip-tags="true" select-non-editable="true" ng-model="writeBoard.content" contenteditable="true" style="width: 90%; height: 400px; margin: 5%; border: 1px solid black; overflow: auto;"></div>
+        <!--<textarea ng-model="writeBoard.content" rows="20" style="width: 90%; margin: 5%; border: 1px solid black; resize: none;"></textarea>-->
+      </div>
+
+      <div class="bar bar-footer">
+        <div class="tabs tabs-energized tabs-icon-left">
+          <a class="tab-item" ng-click="write(writeBoard);">
+            <i class="icon ion-checkmark"></i> 작성완료
+          </a>
+          <a class="tab-item" ng-click="resetModal();">
+            <i class="icon ion-refresh"></i> 재작성
+          </a>
+          <a class="tab-item" ng-click="closeModal();">
+            <i class="icon ion-close"></i> 취소
+          </a>
+        </div>
+      </div>
+
+    </ion-content>
+
+  </ion-modal-view>
+</script>
+
+
+<!-- 글수정 폼 모달  -->
+<script id="community/updateFormModal.html" type="text/ng-template" ng-click="addPicture();">
+  <ion-modal-view>
+
+    <ion-header-bar class="bar bar-header bar-energized">
+      <h1 class="title">글작성</h1>
+      <div class="buttons buttons-right header-item">
+        <span class="right-buttons">
+          <button class="button button-icon button-clear ion-images">
+          </button>
+        </span>
+      </div>
+    </ion-header-bar>
+
+    <ion-content overflow-scroll="false">
+      <div class="list">
+
+        <label class="item item-input">
+          <span class="input-label">작성자</span>
+          <input type="text" ng-model="updateBoard.displayName" ng-value="rootUser.displayName" readonly>
+        </label>
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            카테고리
+          </div>
+          <select ng-model="updateBoard.categoryNo" ng-options="category.categoryNo as category.categoryName for category in categories" ng-required="true">
+            <option value="">선택해주세요</option>
+          </select>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">글제목</span>
+          <input ng-model="updateBoard.title" type="text">
+        </label>
+
+        <div strip-br="true" strip-tags="true" select-non-editable="true" ng-model="updateBoard.content" contenteditable="true" style="width: 90%; height: 400px; margin: 5%; border: 1px solid black; overflow: auto;"></div>
+        <!--<textarea ng-model="updateBoard.content" rows="20" style="width: 90%; margin: 5%; border: 1px solid black; resize: none;"></textarea>-->
+      </div>
+
+      <div class="bar bar-footer">
+        <div class="tabs tabs-energized tabs-icon-left">
+          <a class="tab-item" ng-click="update(updateBoard);">
+            <i class="icon ion-checkmark"></i> 작성완료
+          </a>
+          <a class="tab-item" ng-click="resetModal();">
+            <i class="icon ion-refresh"></i> 재작성
+          </a>
+          <a class="tab-item" ng-click="closeModal();">
+            <i class="icon ion-close"></i> 취소
+          </a>
+        </div>
+      </div>
+
+    </ion-content>
+
+  </ion-modal-view>
+</script>

@@ -1,0 +1,141 @@
+<ion-view title="청춘열차" id="myPageView">
+  <ion-content>
+    <ion-refresher on-refresh="refreshMain()" pulling-text="refresh" spinner="crescent"></ion-refresher>
+    <div class="row" id="main-first-div" style="padding: 0; height: 177px;">
+      <div class="col col-50" id="main-weather-div">
+          <div ng-switch on=today.sky.code>
+            <i class="ion-location main-icon"></i>
+            <span ng-if="today.sky.code != 'SKY_A00'" class="main-location-text"> {{loc}}</span>
+            <span ng-if="today.sky.code == 'SKY_A00'" class="main-location-text"> 위치정보가 없습니다.</span>
+            <!--상태없음-->
+            <div style="margin-top: 15px" ng-switch-when="SKY_A00">
+              <img width="100px" src="../../img/weather_icons/38.png">
+            </div>
+            <!--맑음-->
+            <div ng-switch-when="SKY_A01">
+              <img width="100px" src="../../img/weather_icons/01.png">
+            </div>
+            <!--구름조금-->
+            <div ng-switch-when="SKY_A02">
+              <img width="100px" src="../../img/weather_icons/02.png">
+            </div>
+            <!--구름많음-->
+            <div ng-switch-when="SKY_A03">
+              <img width="100px" src="../../img/weather_icons/03.png">
+            </div>
+            <!--구름많고 비-->
+            <div ng-switch-when="SKY_A04">
+              <img width="100px" src="../../img/weather_icons/12.png">
+            </div>
+            <!--구름많고 눈-->
+            <div ng-switch-when="SKY_A05">
+              <img width="100px" src="../../img/weather_icons/13.png">
+            </div>
+            <!--구름많고 비 또는 눈-->
+            <div ng-switch-when="SKY_A06">
+              <img width="100px" src="../../img/weather_icons/14.png">
+            </div>
+            <!--흐림-->
+            <div ng-switch-when="SKY_A07">
+              <img width="100px" src="../../img/weather_icons/18.png">
+            </div>
+            <!--흐리고 비-->
+            <div ng-switch-when="SKY_A08">
+              <img width="100px" src="../../img/weather_icons/21.png">
+            </div>
+            <!--흐리고 눈-->
+            <div ng-switch-when="SKY_A09">
+              <img width="100px" src="../../img/weather_icons/32.png">
+            </div>
+            <!--흐리고 비 또는 눈-->
+            <div ng-switch-when="SKY_A10">
+              <img width="100px" src="../../img/weather_icons/04.png">
+            </div>
+            <!--흐리고 낙뢰-->
+            <div ng-switch-when="SKY_A11">
+              <img width="100px" src="../../img/weather_icons/29.png">
+            </div>
+            <!--뇌우, 비-->
+            <div ng-switch-when="SKY_A12">
+              <img width="100px" src="../../img/weather_icons/26.png">
+            </div>
+            <!--뇌우, 눈-->
+            <div ng-switch-when="SKY_A13">
+              <img width="100px" src="../../img/weather_icons/27.png">
+            </div>
+            <!--뇌우, 비 또는 눈-->
+            <div ng-switch-when="SKY_A14">
+              <img width="100px" src="../../img/weather_icons/28.png">
+            </div>
+          </div>
+          <h3 ng-if="today.sky.code != 'SKY_A00'" id="temperature-text"> <i class="ion-thermometer"></i> {{cTem}}˚C</h3>
+      </div>
+      <div class="col col-50" style="padding: 0" ng-if="loginUserUid">
+        <div class="row" style="min-height: 50%; max-height: 50%; padding-bottom: 0px;">
+          <div class="list main-message-list-div">
+            <!--<span class="main-list-div-title"><i class="ion-email-unread main-list-title-icon"></i> 쪽지</span>-->
+            <div class="item main-message-list" ng-if="myMainMessageList.length != 0" ng-repeat="myMainMessage in myMainMessageList">
+              <i class="ion-email main-list-title-icon"></i> {{myMainMessage.title}}
+            </div>
+            <div class="item main-message-list" ng-if="myMainMessageList.length == 0">
+              새 쪽지가 없습니다.
+            </div>
+          </div>
+        </div>
+        <div class="row" style="min-height: 50%; max-height: 50%; margin-top: 0; padding-top: 5px; padding-bottom: 0px;">
+          <div class="list main-comment-list-div">
+            <!--<span class="main-list-div-title"><i class="ion-edit main-list-title-icon"></i> 댓글</span>-->
+            <div class="item main-comment-list" ng-if="myMainCommentList.length != 0" ng-repeat="myMainComment in myMainCommentList" ng-click="moveDetail(myMainComment.no, ''+ myMainComment.targetType);">
+              <span><i class="ion-edit main-list-title-icon"></i> [{{myMainComment.title}}] 에 댓글이 달렸습니다.</span>
+            </div>
+            <div class="item main-comment-list" ng-if="myMainCommentList.length == 0">
+              새 댓글이 없습니다.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-50" id="logout-div" ng-if="!loginUserUid">
+        <i class="ion-key main-icon"></i> 로그인 정보가 없습니다.
+        <img width="100px" style="margin-top: 15px;" src="../../img/login.png">
+      </div>
+    </div>
+      <ion-slide-box show-pager="true" auto-play="true" slide-interval="2000" does-continue="true" on-slide-changed="" style="height: 25%; margin-top: 10px">
+        <ion-slide>
+          <div style="height: 100%;">
+            <img height="100%" width="100%" src="../../img/slide_img/slide03.png">
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div style="height: 100%;">
+            <img height="100%" width="100%" src="../../img/slide_img/slide02.png">
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div style="height: 100%;">
+            <img height="100%" width="100%" src="../../img/slide_img/slide01.png">
+          </div>
+        </ion-slide>
+      </ion-slide-box>
+    <div style="height: 100%;">
+      <div class="row" ng-repeat="myMain in myMainList" ng-if="$index % 2 === 0">
+        <div class="col col-50" ng-if="$index < myMainList.length" ng-click="moveDetail(myMainList[$index].no, myMainList[$index].targetType)">
+          <img ng-src="{{myMainList[$index].coverImgUrl}}" class="main-board-img" width="100%"/>
+          <div class="main-board-info">
+            <p class="main-board-long-title" ng-if="myMainList[$index].title.length >= 15"> {{myMainList[$index].title}} </p>
+            <p class="main-board-short-title" ng-if="myMainList[$index].title.length < 15"> {{myMainList[$index].title}} </p>
+            <span class="main-board-author"> {{myMainList[$index].displayName}} </span>
+          </div>
+        </div>
+        <div class="col col-50" ng-if="$index + 1 < myMainList.length" ng-click="moveDetail(myMainList[$index+1].no, myMainList[$index+1].targetType)">
+          <img ng-src="{{myMainList[$index + 1].coverImgUrl}}" class="main-board-img" width="100%"/>
+          <div class="main-board-info">
+            <p class="main-board-long-title" ng-if="myMainList[$index+1].title.length >= 15"> {{myMainList[$index+1].title}} </p>
+            <p class="main-board-short-title" ng-if="myMainList[$index+1].title.length < 15"> {{myMainList[$index+1].title}} </p>
+            <span class="main-board-author"> {{myMainList[$index+1].displayName}} </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ion-infinite-scroll on-infinite="getMainList()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,36 @@
+<ion-modal-view class="transparent1">
+  <ion-content scroll="false">
+    <div style="width: 100%; height: 25%; background-color: white; position: absolute; top:75%;">
+      <div ng-show="isLiked" class="row moreRecommend-div-row" ng-click="recommendSchedule()">
+        <div class="col col-10 moreRecommend-div-col" style="text-align: center"><i class="ion-thumbsup"></i></div>
+        <div class="col col-90 moreRecommend-div-col">추천 ({{scheduleLikeCnt.likeCnt}})</div>
+      </div>
+      <div ng-hide="isLiked" class="row moreRecommend-div-row" style="color : #700700; font-weight: bold" ng-click="cancelRecommend()">
+        <div class="col col-10 moreRecommend-div-col" style="text-align: center"><i class="ion-thumbsup"></i></div>
+        <div class="col col-90 moreRecommend-div-col">추천 ({{scheduleLikeCnt.likeCnt}})</div>
+      </div>
+      <div ng-show="isBookMark" class="row moreRecommend-div-row" ng-click="addBookmark()">
+        <div class="col col-10 moreRecommend-div-col" style="text-align: center"><i class="ion-ios-download-outline"></i></div>
+        <div class="col col-90 moreRecommend-div-col">북마크 ({{scheduleLikeCnt.bookMarkCnt}})</div>
+      </div>
+      <div ng-hide="isBookMark" class="row moreRecommend-div-row" style="color : #700700; font-weight: bold" ng-click="cancelBookMark()">
+        <div class="col col-10 moreRecommend-div-col" style="text-align: center"><i class="ion-ios-download-outline"></i></div>
+        <div class="col col-90 moreRecommend-div-col">북마크 ({{scheduleLikeCnt.bookMarkCnt}})</div>
+      </div>
+      <div ng-show="isCustomizing" class="row moreRecommend-div-row" ng-click="customizing()">
+        <div class="col col-10 moreRecommend-div-col" style="text-align: center"><i class="ion-clipboard"></i></div>
+        <div class="col col-90 moreRecommend-div-col">커스터마이즈 ({{scheduleLikeCnt.customizingCnt}})</div>
+      </div>
+      <div ng-hide="isCustomizing" class="row moreRecommend-div-row" style="color : #700700; font-weight: bold" ng-click="cancelCustomizing()">
+        <div class="col col-10 moreRecommend-div-col" style="text-align: center"><i class="ion-clipboard"></i></div>
+        <div class="col col-90 moreRecommend-div-col">커스터마이즈 ({{scheduleLikeCnt.customizingCnt}})</div>
+      </div>
+      <div class="row moreRecommend-div-row" ng-click="moreRecommend.hide()">
+        <div class="col col-10 moreRecommend-div-col" style="text-align: center"><i class="ion-close-round"></i></div>
+        <div class="col col-90 moreRecommend-div-col">취소</div>
+      </div>
+    </div>
+    <!-- <button class="button" ng-click="qweqweqwe()">사진</button>
+   <button class="button" ng-click="textResult()">결과</button>-->
+  </ion-content>
+</ion-modal-view>

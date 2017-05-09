@@ -1,0 +1,51 @@
+<ion-view view-title="일정 찾기" id="myPageView">
+  <ion-content scroll="false">
+    <div class="bar bar-header" style="height: 4% !important; width: 100%">
+      <div style="position: absolute; top: 20%; left: 2%; width: 100%">
+        <i class="ion-clipboard title-left" style="color: #9c9c9c; float: left"></i>
+        <span style="color: #d1782d; font-size: x-small; float: left">{{totalCount}}</span>
+        <span style="color: #9c9c9c; font-size: x-small; float: left">개의 여행일정이 있습니다.</span>
+        <div style="color: #9c9c9c; font-size: x-small; float: right; padding-right: 5%" ng-click="soltPopular()"> 인기순 ▼</div>
+        <div style="color: #9c9c9c; font-size: x-small; float: right; padding-right: 5%" ng-click="soltDate()">전체 ▼</div>
+      </div>
+    </div>
+  </ion-content>
+  <ion-content scroll="true">
+    <div style="width: 100%; height: 4%"></div>
+
+    <!-- 위로 드래그시 새로고침 -->
+    <ion-refresher on-refresh="soltLoad()" pulling-text="새로고침" spinner="crescent" ng-model="soltType"></ion-refresher>
+
+    <ion-list>
+      <ion-item ng-repeat="schedule in allScheduleList" class="item-light item-complex mypage-item" ng-href="#/scheduleList/{{schedule.recordNo}}">
+        <div class="item-content mypage-content mypage-item-div">
+          <img class="mypage-img" ng-src="{{schedule.cover.filePath}}" ng-if="schedule.picture == 1"/>
+          <img class="mypage-img" src="img/defaultcatImg.png" ng-if="schedule.picture == 0">
+          <div class="mypage-title">{{schedule.title}}<br><br><span>{{schedule.period}}</span></div>
+          <div class="mypage-author-div">
+            <a class="item item-avatar mypage-author-a" href="#">
+              <img class="mypage-author-img" ng-src="{{schedule.photoUrl}}">
+              <p class="mypage-author">{{schedule.displayName}}</p>
+            </a>
+          </div>
+          <div class="mypage-info" ng-if="schedule.strapline != ''">
+            <div class="item-divider mypage-info-title">{{schedule.strapline}}</div>
+            <div class="item-text-wrap mypage-info-content introduce-content">
+              <pre class="pre-text">{{schedule.introduce}}</pre>
+            </div>
+          </div>
+          <div class="mypage-info" style="padding: 10px 10px 0px 10px !important;">
+            <div class="item-text-wrap mypage-info-content" style="border-top: 1px solid #e0e0e0; text-align: right; padding-right: 2%">
+              <i class="ion-thumbsup" style="font-size: larger"></i> {{schedule.likeCnt}}명 추천 &nbsp&nbsp&nbsp
+              <i class="ion-android-create" style="font: larger"></i> {{schedule.commentCnt}}개의 댓글
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <!-- 무한 스크롤 -->
+    <ion-infinite-scroll on-infinite="infinteScroll()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>

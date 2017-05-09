@@ -1,0 +1,22 @@
+<ion-view view-title="지도/스케쥴">
+  <div class="bar bar-header" id="locationInfoMap" data-tap-disabled="true" style="margin-top: 23%"></div>
+  <ion-content>
+    <div style="margin-top: 73%;">
+      <div class="list" ng-repeat="week in period">
+        <div class="item item-divider" onclick="alert('asd')">{{week}}</div>
+        <section id="cd-timeline" class="cd-container">
+          <div ng-repeat="location in getScheduleLocation" >
+            <div class="cd-timeline-block" ng-if="week == location.departureDate">
+              <div class="cd-timeline-icon text-center energized">
+                <i class="ion-android-train timelineIcon"></i>
+              </div>
+              <div class="cd-timeline-content padding energized">
+                <h5 class="marginBottom0 marginTop0"><a style="text-decoration: none; font-weight: bold" ng-href="#/detailSchedule/mapLocation/{{dSchedule.recordNo}}/{{location.contentCode}}">{{location.title}}</a></h5>
+                <p class="marginTop5 cd-author">{{location.detailDepartureDate | date : "h:mma"}}</p>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,169 @@
+<ion-view view-title="{{rootUser.displayName}}님의 페이지" id="myPageView">
+
+  <button class="button button-balanced button-fab button-fab-bottom-right" ng-click="commentOpen();">
+    <i class="icon ion-compose"></i>
+  </button>
+  <ion-content>
+
+    <ion-list>
+      <ion-item class="item-light item-complex mypage-item">
+        <div class="item-content mypage-content mypage-item-div">
+          <img class="detail-img" ng-src="{{dSchedule.cover.filePath}}" ng-if="dSchedule.picture == 1"/>
+          <img class="detail-img" src="img/defaultscheduleImg.jpg" ng-if="dSchedule.picture == 0">
+          <div class="detail-title">{{dSchedule.title}}<br><br><span>{{dSchedule.period}}</span></div>
+          <div class="detail-author-div">
+            <a class="item item-avatar mypage-author-a" href="#">
+              <img class="mypage-author-img" src="../../img/User-Default.jpg" ng-if="!userStatus == true">
+              <img class="mypage-author-img" ng-src="{{rootUser.photoUrl}}" ng-if="userStatus == true">
+              <p class="mypage-author">{{rootUser.displayName}}</p>
+            </a>
+          </div>
+          <div class="detail-info">
+            <div ng-show="updateBtn"><i class="ion-compose" ng-click="updateBtnChange()"></i><br><span>수정</span></div>
+            <div ng-show="updateBtn"><i class="ion-ios-download-outline"></i><br><span>다운로드</span></div>
+            <div ng-show="updateBtn" ng-click="sharing()"><i class="ion-android-share-alt"></i><br><span>공유하기</span></div>
+            <div ng-show="updateBtn"><i class="ion-ios-more-outline" ng-click="moreBtn()"></i><br><span>더보기</span></div>
+            <div ng-hide="updateBtn"><i class="ion-eye" ng-click="updateBtnChange()"></i><br><span>일정보기</span></div>
+            <div ng-hide="updateBtn"><i class="ion-image" ng-click="changeCover()"></i><br><span>커버변경</span></div>
+            <div ng-hide="updateBtn"><i class="ion-ios-paper-outline" ng-click="modal.show()"></i><br><span>인트로 수정</span></div>
+            <div ng-hide="updateBtn"><i class="ion-ios-gear-outline"  ng-click="scheduleSetting()"></i><br><span>설정</span></div>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="item-light item-complex mypage-item" >
+        <div class="mypage-info">
+          <div ng-if="dSchedule.strapline != ''">
+          <div class="item-divider detail-info-title">{{dSchedule.strapline}}</div>
+          <div id="travelPriceList" class="item-text-wrap mypage-info-content" style="border-bottom: 1px solid #e0e0e0">
+            {{dSchedule.introduce}}
+          </div>
+          </div>
+          <div class="item-text-wrap detail-info-content" style="margin-top: 8px" ng-click="movePrice(dSchedule.recordNo)">여행 예산<span>{{dSchedule.totalPrice | currency : "" : 0}} 원<i class="ion-chevron-right"></i></span></div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+ <!--   <div id="detailBox">
+        <img class="detailImg" style="opacity: 0.8" src="img/defaultscheduleImg.jpg" ng-if="dSchedule.picture == 0">
+        <img class="detailImg" ng-src="{{dSchedule.cover.filePath}}" ng-if="dSchedule.picture == 1">
+      <div id="detailTitle" class="detailScheduleTitle" >{{dSchedule.title}}<br><br><span>{{dSchedule.period}}</span></div>
+    </div>
+    <div id="detailButtonBox">
+      <div ng-show="updateBtn"><i class="ion-compose" style="font-size: 35px" ng-click="updateBtn = !updateBtn"></i><br><span>수정</span></div>
+      <div ng-show="updateBtn"><i class="ion-ios-download-outline" style="font-size: 35px"></i><br><span>다운로드</span></div>
+      <div ng-show="updateBtn"><i class="ion-android-share-alt" style="font-size: 35px"></i><br><span>공유하기</span></div>
+      <div ng-show="updateBtn"><i class="ion-ios-more-outline" style="font-size: 35px"></i><br><span>더보기</span></div>
+      <div ng-hide="updateBtn"><i class="ion-eye" style="font-size: 35px" ng-click="updateBtn = !updateBtn"></i><br><span>일정보기</span></div>
+      <div ng-hide="updateBtn"><i class="ion-image" style="font-size: 35px" ng-click="changeCover()"></i><br><span>커버변경</span></div>
+      <div ng-hide="updateBtn"><i class="ion-ios-paper-outline" style="font-size: 35px" ng-click="modal.show()"></i><br><span>인트로 수정</span></div>
+      <div ng-hide="updateBtn"><i class="ion-ios-gear-outline" style="font-size: 35px" ng-click="httptest()"></i><br><span>test</span></div>
+    </div>
+    <div style="font-weight: bold">{{dSchedule.strapline}}</div>
+    <div>{{dSchedule.introduce}}</div>
+    <div id="tourBodgetBox">여행 예산<span>KRW {{dSchedule.budGet}}<i class="ion-chevron-right"></i></span></div>
+    <br>
+    <ion-list id="addSchedule" ng-repeat="week in period">
+        <div><div id="weekText">{{$index + 1}}일차</div>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{week}}</span></div>
+
+      <section id="cd-timeline" class="cd-container">
+        <div ng-repeat="location in getScheduleLocation" >
+          <div class="cd-timeline-block" ng-if="week == location.departureDate">
+            <div class="cd-timeline-icon text-center energized">
+              <i class="ion-android-train timelineIcon"></i>
+            </div>
+            <div class="cd-timeline-content padding energized">
+              <h5 class="marginBottom0 marginTop0"><a style="text-decoration: none; font-weight: bold" ng-href="#/detailSchedule/location/{{dSchedule.recordNo}}/{{location.locationNo}}">{{location.title}}</a>
+                <i class="ion-close-circled" style="font-size: large; float: right" ng-hide="updateBtn" ng-click="delLocation(location.locationNo)"></i></h5>
+              <p class="marginTop5 cd-author">hi</p>
+              <p class="timelineText"><a ng-href="#/detailSchedule/location/{{dSchedule.recordNo}}/{{location.locationNo}}"><img ng-src="{{location.imageUrl}}" style="width: 60%; height: 100px"></a></p>
+              <i class="ion-heart" style="color: red"></i> {{location.likeCount}}
+              <button class="button" style="width: 100%; height: 30px; text-align: center; color: #333333" ng-hide="updateBtn" ng-click="openMemo()"><i class="ion-edit" style="font-size: 20px; color: #d9534f"></i>메모 작성</button>
+            </div>
+          </div>
+        </div>
+          <div class="cd-timeline-block1" ng-hide="updateBtn">
+            <div class="cd-timeline-icon text-center stable">
+              <i class="ion-location timelineIcon"></i>
+            </div>
+            <div class="cd-timeline-content padding stable" style="margin-bottom: 0">
+              <h5 class="marginBottom0 marginTop0"><a style="text-decoration: none; font-weight: bold; color: #333333;" href="#/findAttraction/{{dSchedule.departureDate}}/{{dSchedule.arriveDate}}/{{dSchedule.recordNo}}">방문 명소 추가</a></h5>
+            </div>
+          </div>
+      </section>
+    </ion-list>-->
+    <br>
+      <div class="detail-info">
+      <ion-list id="addSchedule" ng-repeat="week in period">
+        <div><div id="weekText" style="background-color: white; font-size: smaller">{{$index + 1}}일차</div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: smaller">{{week}}</span></div>
+
+        <section id="cd-timeline" class="cd-container">
+          <div ng-repeat="location in getScheduleLocation" >
+            <div class="cd-timeline-block" ng-if="week == location.departureDate">
+              <div class="cd-timeline-icon text-center energized">
+                <i class="ion-android-train timelineIcon"></i>
+              </div>
+              <div class="cd-timeline-content padding energized">
+                <h5 class="marginBottom0 marginTop0"><a style="text-decoration: none; font-weight: bold" ng-href="#/location/{{location.contentCode}}">{{location.title}}</a> <span ng-click="location.isScheduleDetail = !location.isScheduleDetail"><i class="ion-android-arrow-dropdown" style="font-size: x-large"></i></span>
+                  <i class="ion-close-circled" style="font-size: large; float: right" ng-hide="updateBtn" ng-click="delLocation(location.locationNo)"></i></h5>
+                <p ng-show="location.isScheduleDetail" class="marginTop5 cd-author">{{location.detailDepartureDate | date:"hh:mma"}}</p>
+                <p ng-show="location.isScheduleDetail" class="timelineText"><a ng-href="#/location/{{location.contentCode}}"><img ng-src="{{location.imageUrl}}" style="width: 60%; height: 100px"></a></p>
+                <i ng-show="location.isScheduleDetail" class="ion-heart" style="color: red"></i> <span ng-show="location.isScheduleDetail">{{location.likeCount}} </span>
+                <button ng-show="location.isScheduleDetail && !updateBtn" class="button" style="width: 100%; height: 30px; text-align: center; color: #333333" ng-hide="updateBtn" ng-click="openMemo(location)"><i class="ion-edit" style="font-size: 20px; color: #d9534f"></i>메모 작성</button>
+              </div>
+
+              <!-- 메모 부분-->
+              <ion-list ng-repeat="scheduleMemo in scheduleMemoList">
+                <ion-item class="item-light item-complex mypage-item" ng-if="scheduleMemo.contentId == location.contentCode" ng-click="moveMemoDetail(scheduleMemo.scheduleMemoNo)">
+                  <div class="mypage-info">
+                      <div class="item-divider detail-info-title" style="border-bottom: 1px solid #e0e0e0">
+                        <span ng-if="scheduleMemo.memoType == 1" style="color: #1bb556; font-weight: bold">메모</span>
+                        <span ng-if="scheduleMemo.memoType == 2" style="color: #3333b5; font-weight: bold">정보</span>
+                        {{scheduleMemo.title}}
+                      </div>
+                      <div class="item-text-wrap mypage-info-content" ng-bind-html="scheduleMemo.content">
+                      </div>
+                  </div>
+                  <div style="padding-top: 10px">
+                    <div id="location-priceList" ng-repeat="budget in scheduleMemo.price">
+                      <div class="item-text-wrap mypage-info-content" style="padding-left: 10px;">
+                        <i class="ion-cash"></i>
+                        <span ng-if="budget.priceType == 1">교통비</span>
+                        <span ng-if="budget.priceType == 2">음식</span>
+                        <span ng-if="budget.priceType == 3">오락, 엑티비티</span>
+                        <span ng-if="budget.priceType == 4">쇼핑</span>
+                        <span ng-if="budget.priceType == 5">숙박</span>
+                        <span ng-if="budget.priceType == 6">기타</span>
+                        |
+                        <span>{{budget.content}}</span> |
+                        <span>{{budget.travelPrice | currency : "" : 0}} 원</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" style="border-top: 1px solid #e0e0e0">
+                    <div class="col col-50 mypage-info-content" style="text-align: center" ng-if="scheduleMemo.isLike == 0" ng-click="recommedComment($event, scheduleMemo.scheduleMemoNo)">
+                      <i class="ion-thumbsup"></i> 추천 {{scheduleMemo.likeCnt}}
+                    </div>
+                    <div class="col col-50 mypage-info-content" style="text-align: center; color: #b56216"  ng-if="scheduleMemo.isLike == 1" ng-click="cancelCommentLike($event, scheduleMemo.scheduleMemoNo)">
+                      <i class="ion-thumbsup" style="color: #b56216"></i> <span style="color : #b56216">추천 {{scheduleMemo.likeCnt}}</span>
+                    </div>
+                    <div class="col col-50 mypage-info-content" style="text-align: center">
+                      <i class="ion-edit"></i> 댓글 {{scheduleMemo.commentCnt}}
+                    </div>
+                  </div>
+                </ion-item>
+              </ion-list>
+            </div>
+          </div>
+          <div class="cd-timeline-block1" ng-hide="updateBtn">
+            <div class="cd-timeline-icon text-center stable">
+              <i class="ion-location timelineIcon"></i>
+            </div>
+            <div class="cd-timeline-content padding stable" style="margin-bottom: 0">
+              <h5 class="marginBottom0 marginTop0"><a style="text-decoration: none; font-weight: bold; color: #333333;" href="#/findAttraction/{{dSchedule.departureDate}}/{{dSchedule.arriveDate}}/{{dSchedule.recordNo}}">방문 명소 추가</a></h5>
+            </div>
+          </div>
+        </section>
+      </ion-list>
+      </div>
+  </ion-content>
+</ion-view>

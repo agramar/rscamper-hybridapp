@@ -1,0 +1,108 @@
+<ion-view title="커뮤니티">
+
+  <!-- 헤더 우측 상단 액션시트 버튼 -->
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-android-share-alt" ng-click="share($event)"></button>
+    <button class="button button-icon button-clear ion-android-more-vertical" ng-click="showActionSheet($event)" ng-if="rootUser.userUid == board.userUid"></button>
+  </ion-nav-buttons>
+
+  <ion-content overflow-scroll="false">
+
+    <!-- 위로 드래그시 새로고침 -->
+    <ion-refresher on-refresh="load()" pulling-text="새로고침" spinner="crescent"></ion-refresher>
+
+    <!-- BOARD -->
+    <div class="list card stable-100-bg">
+
+      <!-- WRITER -->
+      <div class="item item-avatar" style="padding-bottom: 5px;">
+        <!-- writer img -->
+        <img ng-src="{{board.photoUrl}}">
+        <!-- writer displayName-->
+        <h2>{{board.displayName}}</h2>
+        <!-- regdate -->
+        <p>{{board.regDate | timesince : 'kr' }}</p>
+      </div>
+
+      <!-- targetType == 1 -->
+      <div ng-if="board.targetType != '2'">
+        <!-- TITLE -->
+        <div class="item item-divider">
+          <a>{{board.categoryName}}</a> <b>{{board.title}}</b>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="item item-body" style="min-height:200px; overflow: hidden">
+          <div ng-bind-html="board.content"></div>
+        </div>
+      </div>
+
+      <!-- targetType == 2 -->
+      <div ng-if="board.targetType == '2'">
+        <!-- TITLE -->
+        <div class="item item-divider" style="line-height: 1.4; height: 100%; overflow: visible; white-space: normal">
+          <a>{{board.title}}</a><br>
+          <i class="ion-quote" style="font-size: 16px; color: #ffbbc8;"></i>
+          <b style="font-size: 11px" ng-repeat="routeDetail in board.routeDetailList" ng-show="$index == 0">{{routeDetail.place}}</b>
+          <b style="font-size: 11px" ng-repeat="routeDetail in board.routeDetailList" ng-show="$index >= 1"> - {{routeDetail.place}}</b>
+        </div>
+        <div>
+          <section id="cd-timeline" class="cd-container">
+            <div id="line-div" class="dfsdf"></div>
+            <div ng-repeat="routeDetail in board.routeDetailList">
+              <div class="cd-timeline-block">
+                <div class="cd-timeline-icon myPink">
+                  <i class="ion-location timelineIcon myPink"></i>
+                </div>
+                <div class="cd-timeline-content stable">
+                  <h5 class="marginBottom0 marginTop0" style="font-weight: bold; color: black;"><i class="ion-flag" style="color: #ffaec0;"></i> {{routeDetail.place}}</h5>
+                  <pre class="timelinePreText">{{routeDetail.content}}</pre>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="button-bar bar-energized">
+        <a class="button button-raised ink-dark" ng-click="likeBoard(board.targetType);"><span class="ion-thumbsup"></span> 좋아요 <b style="color: #f49335;">{{board.likeCnt}}</b></a>
+        <a class="button button-raised ink-dark" ng-click="addBookMark(board.targetType);"><span class="ion-bookmark" ></span> <b ng-if="bookMark"> 북마크취소</b> <b ng-if="!bookMark"> 북마크</b></a>
+        <a class="button button-raised ink-dark" ng-click="focusCommentBox();"><span class="ion-chatbubbles"></span> 댓글 <b style="color: #f49335;">{{board.commentCnt}}</b></a>
+      </div>
+
+    </div>
+
+    <!-- COMMENT -->
+    <div class="list card stable-100-bg" style="position: relative;" ng-repeat="comment in commentList">
+      <button class="button button-small button-energized ion-android-more-vertical" style="min-height: 25px; height: 25px; position: absolute; right:10px; top:12px; z-index: 99;"  ng-click="showCommentActionSheet('{{comment.userUid}}', '{{comment.commentNo}}', '{{comment.displayName}}', '{{comment.content}}')"></button>
+      <b class="item item-avatar" style="padding-bottom: 2px; padding-top: 5px; min-height:50px; ">
+        <img src="img/User-Default.jpg" style="height: 30px; width: 30px;">
+        <h2>{{comment.displayName}}</h2>
+        <p style="font-size: 5px;">{{comment.regDate | timesince : 'kr' }}</p>
+      </b>
+      <div class="item item-text-wrap" style="padding-left: 10px; padding-right: 10px;">
+        {{comment.content}}
+      </div>
+    </div>
+
+    <!-- 밑에 공간 -->
+    <div class="list card" style="position: relative; min-height:15px;">
+    </div>
+
+    <!-- 무한 스크롤 -->
+    <ion-infinite-scroll on-infinite="getCommentList()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>
+
+  </ion-content>
+
+  <!-- COMMENT INPUT -->
+  <div class="bar bar-footer bar-energized-100">
+    <label class="item-input-wrapper energized-100-bg">
+      <input id="commentInputBox" type="text" placeholder="Type in your comment..." style="width: 100%;" ng-model="comment.commentContent">
+    </label>
+    <button class="button button-clear button-icon ion-chatbubbles" ng-click="writeComment();"></button>
+  </div>
+
+</ion-view>
+
+

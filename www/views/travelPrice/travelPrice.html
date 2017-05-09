@@ -1,0 +1,118 @@
+<ion-view view-title="여행예산" id="myPageView">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-light item-complex mypage-item">
+        <div class="item-divider detail-info-title" style="border-bottom: 1px solid #e0e0e0; color: #777777 !important;">
+          <span style=" margin-left: 3%">여행 예산</span>
+          <span style="float: right; margin-right: 3%"><span style="color: #ff9c00">{{travelPriceInfo.totalSum | currency : "" : 0}}</span> 원</span>
+        </div>
+        <div class="row" style="max-height: 78px; margin-top: 10px">
+          <div class="col col-20">
+            <div style="background-color: #6e68ff; border-radius: 50%; text-align: center; width: 80%; height: 100%; line-height: 1.9; margin-left: 10%">
+              <i class="ion-android-train" style="color: white; font-size: xx-large"></i>
+            </div>
+          </div>
+          <div class="col col-30 detail-info-title" style="color: #777777 !important;">
+            <div class="row">교통비</div>
+            <div class="row" style="margin-top: 0">{{travelPriceInfo.type1 | currency : "" : 0}}</div>
+          </div>
+
+          <div class="col col-20">
+            <div style="background-color: #ff7724; border-radius: 50%; text-align: center; width: 80%; height: 100%; line-height: 1.9; margin-left: 10%">
+              <i class="ion-android-restaurant" style="color: white; font-size: xx-large"></i>
+            </div>
+          </div>
+          <div class="col col-30 detail-info-title" style="color: #777777 !important;">
+            <div class="row">음식</div>
+            <div class="row" style="margin-top: 0">{{travelPriceInfo.type2 | currency : "" : 0}}</div>
+          </div>
+        </div>
+
+
+        <div class="row" style="max-height: 78px; margin-top: 5px">
+          <div class="col col-20">
+            <div style="background-color: #3dd8ff; border-radius: 50%; text-align: center; width: 80%; height: 100%; line-height: 1.9; margin-left: 10%">
+              <i class="ion-ios-game-controller-b" style="color: white; font-size: xx-large"></i>
+            </div>
+          </div>
+          <div class="col col-30 detail-info-title" style="color: #777777 !important;">
+            <div class="row">오락, 엑티비티</div>
+            <div class="row" style="margin-top: 0">{{travelPriceInfo.type3 | currency : "" : 0}}</div>
+          </div>
+
+          <div class="col col-20">
+            <div style="background-color: #6894ff; border-radius: 50%; text-align: center; width: 80%; height: 100%; line-height: 1.9; margin-left: 10%">
+              <i class="ion-ios-cart" style="color: white; font-size: xx-large"></i>
+            </div>
+          </div>
+          <div class="col col-30 detail-info-title" style="color: #777777 !important;">
+            <div class="row">쇼핑</div>
+            <div class="row" style="margin-top: 0">{{travelPriceInfo.type4 | currency : "" : 0}}</div>
+          </div>
+        </div>
+
+        <div class="row" style="max-height: 78px; margin-top: 5px">
+          <div class="col col-20">
+            <div style="background-color: #ffb300 ; border-radius: 50%; text-align: center; width: 80%; height: 100%; line-height: 1.9; margin-left: 10%">
+              <i class="ion-home" style="color: white; font-size: xx-large"></i>
+            </div>
+          </div>
+          <div class="col col-30 detail-info-title" style="color: #777777 !important;">
+            <div class="row">숙박</div>
+            <div class="row" style="margin-top: 0">{{travelPriceInfo.type5 | currency : "" : 0}}</div>
+          </div>
+
+          <div class="col col-20">
+            <div style="background-color: #ff3a50; border-radius: 50%; text-align: center; width: 80%; height: 100%; line-height: 1.9; margin-left: 10%">
+              <i class="ion-ios-location-outline" style="color: white; font-size: xx-large"></i>
+            </div>
+          </div>
+          <div class="col col-30 detail-info-title" style="color: #777777 !important;">
+            <div class="row">기타</div>
+            <div class="row" style="margin-top: 0">{{travelPriceInfo.type6 | currency : "" : 0}}</div>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="item-light item-complex mypage-item">
+        <div class="item-divider detail-info-title" style="border-bottom: 1px solid #e0e0e0; color: #777777 !important;">
+          <span style=" margin-left: 3%">상세 내용</span>
+        </div>
+        <div class="item-text-wrap travelPrice-info-content" ng-repeat="week in period">
+            <div style="border-bottom: 1px solid #e0e0e0; padding-top: 5px; padding-bottom: 5px">
+              <div>
+                <span style="font-size: 25px; color: #ff7724; margin-left: 3%">●</span> <span style="font-size: 13px"> Day {{$index + 1}} - {{week}}</span>
+              </div>
+
+
+              <div id="asdasdasdarfr" ng-repeat="list in travelPriceList">
+                <div ng-if="week == list.dDate">
+                  <div data-ng-show="$first">
+                    <span style="margin-left: 7%; font-size: 12px; color: black; font-weight: bold">{{list.title}}</span>
+                  </div>
+                  <div class="row" style="margin-left: 7%; padding: 0">
+                    <div class="col col-10" style="padding: 0; text-align: center; line-height: 1.2">
+                      <i ng-if="list.priceType == 1" class="ion-android-train" style="color: #6e68ff; font-size: xx-large"></i>
+                      <i ng-if="list.priceType == 2" class="ion-android-restaurant" style="color: #ff7724; font-size: xx-large"></i>
+                      <i ng-if="list.priceType == 3" class="ion-ios-game-controller-b" style="color: #3dd8ff; font-size: xx-large"></i>
+                      <i ng-if="list.priceType == 4" class="ion-ios-cart" style="color: #6894ff; font-size: xx-large"></i>
+                      <i ng-if="list.priceType == 5" class="ion-home" style="color: #ffb300; font-size: xx-large"></i>
+                      <i ng-if="list.priceType == 6" class="ion-ios-location" style="color: #ff3a50; font-size: xx-large"></i>
+                    </div>
+                    <div class="col col-90" style="padding: 0">
+                      <div>
+                        <span style="font-weight: bold">{{list.travelPrice | currency : "" : 0}}</span>
+                      </div>
+                      <div>{{list.content}}</div>
+                   </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,21 @@
+<ion-modal-view class="transparent1">
+  <ion-content scroll="false">
+    <div style="width: 100%; height: 60%; background-color: white; position: absolute; top:20%;">
+      <div style="text-align: center; width: 100%; height: 9%; font-size: large; background-color: #ffc900; padding-top: 2%">
+        <span style="font-weight: bold; color: white">방 만들기</span>
+        <a ng-click="closeModal()" style="float: left; margin-left: 2%; text-decoration: none;"><i class="ion-close-round" style="color: white"></i></a>
+        <a ng-click="makeRoom(createRoom)" style="float: right; margin-right: 2%; text-decoration: none;"><i class="ion-checkmark-round" style="color: white"></i></a>
+      </div>
+      <div class="item">지역 선택</div>
+      <ion-scroll style="width: 100%; height: 50%; padding-top: 0%;overflow-y: scroll; border-top: 1px gainsboro solid; border-bottom: 1px gainsboro solid" ng-mousedown="qweqwe($event)" ng-click="qweqwe($event)">
+          <ion-radio id="locationCategory" ng-repeat="code in codeTb" ng-value="code.codeNo" ng-model="createRoom.codeNo">
+            {{code.codeName}}
+          </ion-radio>
+      </ion-scroll>
+      <div class="item">방제목 입력</div>
+      <div class="item item-input"><input id="roomTitle" type="text" ng-model="createRoom.roomTitle"></div>
+    </div>
+    <!-- <button class="button" ng-click="qweqweqwe()">사진</button>
+   <button class="button" ng-click="textResult()">결과</button>-->
+  </ion-content>
+</ion-modal-view>

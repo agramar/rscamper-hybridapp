@@ -1,0 +1,170 @@
+<ion-view view-title="상세 정보" id="myPageView">
+
+  <button class="button button-balanced button-fab button-fab-bottom-right" ng-click="commentOpen();">
+    <i class="icon ion-compose"></i>
+  </button>
+
+  <ion-content>
+
+    <ion-list>
+      <ion-item class="item-light item-complex mypage-item">
+        <div class="item-content mypage-content mypage-item-div">
+          <img class="detail-img" ng-src="{{locationMap.firstimage}}" />
+          <div class="locationDetail-info">
+              <div class="item-divider detail-info-title" style="text-align: center">{{locationMap.title}}</div>
+              <div id="location-info" class="item-text-wrap detailLocation-info-content detailLocation-moreText" style="text-align: left" ng-bind-html="locationMap.overview">
+              </div>
+          </div>
+            <div ng-show="moreText" style="width: 10%; height: 20px; margin-left: 45%; font-size: 12px; text-align: center;" ng-click="moreDetail()">▼더보기</div>
+            <div ng-hide="moreText" style="width: 10%; height: 20px; margin-left: 45%; font-size: 12px; text-align: center;" ng-click="closeDetail()">▲접기</div>
+          <div class="detail-info" style="border-top: 1px solid #e0e0e0; height: 57px; background-color: #fffad9;">
+            <div ng-show="isLiked" ng-click="likePlus(locationMap.contentid)"><i class="ion-ios-heart-outline" style="font-size: x-large"></i><br><span style="font-size: xx-small">가고싶어요!</span></div>
+            <div ng-hide="isLiked" ng-click="removeLiked(locationMap.contentid)"><i class="ion-heart" style="font-size: x-large; color: red"></i><br><span style="font-size: xx-small">가고싶어요!</span></div>
+            <div ng-show="isBack" ng-click="backLikePlus(locationMap.contentid)" class="detailLocationBtn"><i class="ion-android-pin" style="font-size: x-large"></i><br><span style="font-size: xx-small">다녀왔어요!</span></div>
+            <div ng-hide="isBack" ng-click="removeBackLiked(locationMap.contentid)" class="detailLocationBtn"><i class="ion-android-pin" style="font-size: x-large; color: #ffc145"></i><br><span style="font-size: xx-small">다녀왔어요!</span></div>
+            <div class="detailLocationBtn" ng-click="openMemo(locationMap)"><i class="ion-android-create" style="font-size: x-large"></i><br><span style="font-size: xx-small">리뷰 쓰기</span></div>
+            <div class="detailLocationBtn"><i class="ion-android-share-alt" style="font-size: x-large"></i><br><span style="font-size: xx-small">공유 하기</span></div>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="item-light item-complex mypage-item">
+        <div class="item-text-wrap mypage-info-content" style="padding: 4%; padding-left: 3%;">
+          <div>
+            <span style="color: red; font-size: small; font-weight: bold"><i class="ion-heart"></i> {{locationCnt.likeCnt}}명</span><span style="font-size: small">이 가고 싶어합니다.</span>
+          </div>
+          <div style="padding-top: 1%">
+            <span style="color: #ffc145; font-size: small; font-weight: bold"><i class="ion-ios-location-outline"></i> {{locationCnt.backLocationCnt}}명</span><span style="font-size: small">이 이 명소를 방문했습니다.</span>
+          </div>
+          <div style="padding-top: 1%">
+            <span style="color: black; font-size: small; font-weight: bold"><i class="ion-ios-list-outline"></i> {{locationCnt.postCnt}}개</span><span style="font-size: small">의 포스트가 있습니다.</span>
+          </div>
+        </div>
+        <div style="width: 100%; border-top: 1px solid #e0e0e0; padding: 4%; padding-left: 3%">
+          <div class="item-text-wrap mypage-info-content" style="font-size: small !important; font-weight: bold !important;">
+            <i class="ion-android-phone-portrait"></i> 번호
+          </div>
+          <div style="font-size: small; padding-top: 1%">
+            {{locationMap.tel}}
+          </div>
+        </div>
+        <div style="width: 100%; border-top: 1px solid #e0e0e0; padding: 4%; padding-left: 3%">
+          <div class="item-text-wrap mypage-info-content" style="font-size: small !important; padding-top: 1%; font-weight: bold !important; ">
+            <i class="ion-home"></i> 주소
+          </div>
+          <div style="font-size: 12px; padding-top: 1%">
+            {{locationMap.addr1}} {{locationMap.addr2}}
+          </div>
+          <div id="scheduleMap" data-tap-disabled="true" style="padding-top: 1%"></div>
+        </div>
+
+        <div style="width: 100%; border-top: 1px solid #e0e0e0; padding: 4%; padding-left: 3%">
+          <div class="item-text-wrap mypage-info-content" style="font-size: small !important; font-weight: bold !important;">
+            <i class="ion-images"></i> 이미지
+          </div>
+          <a class="item item-list-detail">
+            <ion-scroll direction="x">
+              <img ng-show="isPhoto" ng-repeat="image in imageList" ng-src="{{image.originimgurl}}" ng-click="showImages($index)" class="image-list-thumb">
+              <img ng-hide="isPhoto" src="img/no_image.gif" class="image-list-thumb">
+            </ion-scroll>
+          </a>
+        </div>
+      </ion-item>
+
+      <ion-item class="item-light item-complex mypage-item" ng-repeat="myPost in myPostList" ng-click="moveMemoDetail(myPost.scheduleMemoNo)">
+        <div class="scheduleList-author-div">
+          <a class="item item-avatar scheduleList-author-a">
+            <img class="scheduleList-author-img" ng-src="{{myPost.photoUrl}}">
+            <div class="scheduleList-autor-time" style="left: 70%; width: 25%;">
+              <div style="float: right">
+                <i class="ion-document-text"></i> {{myPost.recordTitle}}
+              </div>
+              <br>
+              <div style="float: right">
+                <i class="ion-android-pin"></i> {{myPost.locationTitle}}
+              </div>
+            </div>
+            <p class="scheduleList-author">{{myPost.displayName}}</p>
+            <div class="item-text-wrap mypage-info-content">{{myPost.regDate | timesince : 'kr' }}</div>
+          </a>
+          <div class="mypage-info">
+            <div class="item-divider detail-info-title" style="border-bottom: 1px solid #e0e0e0">
+              <span ng-if="myPost.memoType == 1" style="color: #1bb556; font-weight: bold">메모</span>
+              <span ng-if="myPost.memoType == 2" style="color: #3333b5; font-weight: bold">정보</span>
+              {{myPost.title}}
+            </div>
+            <div class="item-text-wrap mypage-info-content" ng-bind-html="myPost.content">
+            </div>
+          </div>
+
+          <div style="padding-top: 10px">
+            <div id="location-priceList" ng-repeat="budget in myPost.price">
+              <div class="item-text-wrap mypage-info-content" style="padding-left: 10px;">
+                <i class="ion-cash"></i>
+                <span ng-if="budget.priceType == 1">교통비</span>
+                <span ng-if="budget.priceType == 2">음식</span>
+                <span ng-if="budget.priceType == 3">오락, 엑티비티</span>
+                <span ng-if="budget.priceType == 4">쇼핑</span>
+                <span ng-if="budget.priceType == 5">숙박</span>
+                <span ng-if="budget.priceType == 6">기타</span>
+                |
+                <span>{{budget.content}}</span> |
+                <span>{{budget.travelPrice | currency : "" : 0}} 원</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="border-top: 1px solid #e0e0e0">
+            <div class="col col-50 mypage-info-content" style="text-align: center" ng-click="recommedComment($event, myPost.scheduleMemoNo)" ng-if="myPost.isLike == 0">
+              <i class="ion-thumbsup"></i> 추천 {{myPost.likeCnt}}
+            </div>
+            <div class="col col-50 mypage-info-content" style="text-align: center; color: #b56216" ng-if="myPost.isLike == 1" ng-click="cancelCommentLike($event, myPost.scheduleMemoNo)">
+              <i class="ion-thumbsup" style="color: #b56216"></i> <span style="color : #b56216">추천 {{myPost.likeCnt}}</span>
+            </div>
+            <div class="col col-50 mypage-info-content" style="text-align: center">
+              <i class="ion-edit"></i> 댓글 {{myPost.commentCnt}}
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <!-- <img ng-src="{{locationMap.firstimage}}" style="width: 100%; height: 45%">
+     <div style="width: 100%; height: 5%; border-bottom: 1px solid; border-color: silver; text-align: center"><span style="font-weight: bold; font-size: 20px">{{locationMap.title}}</span></div>
+     <div style="width: 100%; height: 7%; border-bottom: 1px solid; border-color: silver; text-align: center">
+       <div ng-hide="isLiked" class="detailLocationBtn" ng-click="likePlus(locationMap.contentid)"><i class="ion-ios-heart-outline" style="font-size: x-large"></i><br><span style="font-size: xx-small">가고싶어요!</span></div>
+       <div ng-show="isLiked" class="detailLocationBtn" ng-click="removeLiked(locationMap.contentid)"><i class="ion-heart" style="font-size: x-large; color: red"></i><br><span style="font-size: xx-small">가고싶어요!</span></div>
+       <div class="detailLocationBtn"><i class="ion-android-pin" style="font-size: x-large"></i><br><span style="font-size: xx-small">다녀왔어요!</span></div>
+       <div class="detailLocationBtn"><i class="ion-android-create" style="font-size: x-large"></i><br><span style="font-size: xx-small">리뷰 쓰기</span></div>
+       <div class="detailLocationBtn"><i class="ion-android-share-alt" style="font-size: x-large"></i><br><span style="font-size: xx-small">공유 하기</span></div>
+     </div>
+     <div class="item item-divider">
+       <i class="ion-android-home"></i>
+       Info
+     </div>
+     <div class="item"><i class="ion-heart" style="color: red"></i>{{likeCount}}명이 가고 싶어합니다.</div>
+     <div class="item item-divider">
+       <i class="ion-home"></i>
+       Address
+     </div>
+     <div class="item">{{locationMap.addr1}}<br>{{locationMap.addr2}}</div>
+     <div class="item item-divider">
+       <i class="ion-iphone"></i>
+       Number
+     </div>
+     <div class="item">{{locationMap.tel}}</div>
+     <div class="item item-divider">
+       <i class="ion-ios-navigate-outline"></i>
+       Location
+     </div>
+     <div id="scheduleMap" data-tap-disabled="true"></div>
+     <div class="item item-divider">
+       <i class="ion-images"></i>
+       Image
+     </div>
+     <a class="item item-list-detail">
+       <ion-scroll direction="x">
+         <img ng-show="isPhoto" ng-repeat="image in images" ng-src="{{image.originimgurl}}" ng-click="showImages($index)" class="image-list-thumb">
+         <img ng-hide="isPhoto" src="img/no_image.gif" class="image-list-thumb">
+       </ion-scroll>
+     </a>-->
+  </ion-content>
+</ion-view>

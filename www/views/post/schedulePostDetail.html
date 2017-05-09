@@ -1,0 +1,93 @@
+<ion-view view-title="포스트" id="myPageView">
+
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-android-more-vertical" ng-click="detailMoreBtn()" ng-if="myPost.userUid == rootUser.userUid"></button>
+  </ion-nav-buttons>
+
+  <ion-content>
+
+    <ion-list>
+      <ion-item class="item-light item-complex mypage-item">
+        <div class="scheduleList-author-div">
+          <a class="item item-avatar scheduleList-author-a">
+            <img class="scheduleList-author-img" ng-src="{{myPost.photoUrl}}">
+            <div class="scheduleList-autor-time" style="left: 70%; width: 25%;">
+              <div style="float: right">
+                <i class="ion-document-text"></i> {{myPost.recordTitle}}
+              </div>
+              <br>
+              <div style="float: right">
+                <i class="ion-android-pin"></i> {{myPost.locationTitle}}
+              </div>
+            </div>
+            <p class="scheduleList-author">{{myPost.displayName}}</p>
+            <div class="item-text-wrap mypage-info-content">{{myPost.regDate | timesince : 'kr' }}</div>
+          </a>
+          <div class="mypage-info">
+            <div class="item-divider detail-info-title" style="border-bottom: 1px solid #e0e0e0">
+              <span ng-if="myPost.memoType == 1" style="color: #1bb556; font-weight: bold">메모</span>
+              <span ng-if="myPost.memoType == 2" style="color: #3333b5; font-weight: bold">정보</span>
+              {{myPost.title}}
+            </div>
+            <div class="item-text-wrap mypage-info-content" ng-bind-html="myPost.content">
+            </div>
+          </div>
+
+          <div style="padding-top: 10px">
+            <div id="location-priceList" ng-repeat="budget in myPost.price">
+              <div class="item-text-wrap mypage-info-content" style="padding-left: 10px;">
+                <i class="ion-cash"></i>
+                <span ng-if="budget.priceType == 1">교통비</span>
+                <span ng-if="budget.priceType == 2">음식</span>
+                <span ng-if="budget.priceType == 3">오락, 엑티비티</span>
+                <span ng-if="budget.priceType == 4">쇼핑</span>
+                <span ng-if="budget.priceType == 5">숙박</span>
+                <span ng-if="budget.priceType == 6">기타</span>
+                |
+                <span>{{budget.content}}</span> |
+                <span>{{budget.travelPrice | currency : "" : 0}} 원</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="border-top: 1px solid #e0e0e0">
+            <div class="col col-50 mypage-info-content" style="text-align: center" ng-click="recommedComment($event, myPost.scheduleMemoNo)" ng-if="myPost.isLike == 0">
+              <i class="ion-thumbsup"></i> 추천 {{myPost.likeCnt}}
+            </div>
+            <div class="col col-50 mypage-info-content" style="text-align: center; color: #b56216"  ng-if="myPost.isLike == 1"  ng-click="cancelCommentLike($event, myPost.scheduleMemoNo)">
+              <i class="ion-thumbsup" style="color: #b56216"></i> <span style="color : #b56216">추천 {{myPost.likeCnt}}</span>
+            </div>
+            <div class="col col-50 mypage-info-content" style="text-align: center">
+              <i class="ion-edit"></i> 댓글 {{commentCnt}}
+            </div>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="item-light item-complex mypage-item" ng-repeat="postComment in postCommentList">
+        <div class="scheduleList-author-div">
+          <a class="item item-avatar scheduleList-author-a">
+            <img class="scheduleList-author-img" ng-src="{{postComment.photoUrl}}">
+            <span class="scheduleList-author scheduleList-autor-time">{{postComment.regDate | timesince : 'kr' }}</span>
+            <div class="scheduleList-autor-time" style="left: 93%"  ng-if="postComment.userUid == rootUser.userUid" ng-click="delComment(postComment.commentNo)"><i class="ion-close-round"></i></div>
+            <p class="scheduleList-author">{{postComment.displayName}}</p>
+            <div class="item-text-wrap mypage-info-content">{{postComment.content}}</div>
+          </a>
+        </div>
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+
+  <ion-footer-bar id="footerBar" class="bar-stable item-input-inset message-footer" keyboard-attach>
+    <div id="recentlyChat" style=" width: 100%;  position: absolute">
+    </div>
+    <label class="item-input-wrapper">
+      <textarea id="inputText" ng-keyup="resize()" ng-model="msgContent" value="" required minlength="1" maxlength="1500" msd-elastic style="resize: none; overflow: visible; font-size: 15px"></textarea>
+    </label>
+    <div class="footer-btn-wrap">
+      <button class="button button-icon icon ion-android-send footer-btn button-clear button-dark" ng-click="insertPostComment(msgContent)"
+              ng-disabled="!msgContent || msgContent === ''" style="color: black"></button>
+    </div>
+  </ion-footer-bar>
+</ion-view>

@@ -1,0 +1,12 @@
+<ion-view view-title="채팅">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-plus-round" ng-click="modal.show()"></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-list>
+      <ion-item ng-href="#/categoryDetail/{{code.codeNo}}" ng-repeat="code in codeTb">
+        {{code.codeName}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

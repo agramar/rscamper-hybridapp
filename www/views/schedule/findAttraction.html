@@ -1,0 +1,54 @@
+<ion-view view-title="명소 찾기"  id="myPageView">
+  <!--오른쪽에 내비게이션 버튼 추가-->
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-ios-search-strong" ng-click="qqwe()"></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div class="bar bar-header item-input-inset" ng-show="showSearchBox">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="search" placeholder="Search" ng-model="userSearch.place">
+      </label>
+      <button ng-click="searchLocation()">검색</button>
+    </div>
+    <!--<div class="list" ng-repeat="place in getPlaces" style="margin: 5px">
+      <a class="item item-thumbnail-left" style="padding-bottom: 8px"on-tap="openPickerView(place)">
+        <img ng-src="{{place.firstimage}}">
+        <div style="height:80px;">
+          <h2>{{place.title}}</h2>
+          <p>{{place.addr1}}</p>
+        </div>
+      </a>
+    </div>-->
+    <ion-list>
+      <ion-item class="item-light item-complex mypage-item" ng-repeat="place in wishBoardList" on-tap="openPickerView(place)">
+        <div class="item-content mypage-content mypage-item-div row">
+          <div class="col col-25" style="padding: 0px; height: 100px">
+            <img class="wishBoard-img"  ng-src="{{place.firstimage}}" />
+          </div>
+          <div class="col col-75"  style="word-wrap: break-word; position: relative; padding: 5px 8px 8px 8px;">
+            <div>
+              <div class="item-divider mypage-info-title" style="padding-bottom: 2px;">{{place.title}}</div>
+              <div class="item-text-wrap mypage-info-content introduce-content">
+                {{place.addr1}}
+              </div>
+            </div>
+            <div class="row wishboard-bottom-div">
+              <div class="item-text-wrap wishBoard-info-content col col-60" style="padding: 0; line-height: 1.5">
+                <i class="ion-ios-list-outline" style="font-size: 16px;"></i><span style="font-size: 10px; font-weight: bold"> {{place.postCnt}}개의 포스트</span>
+              </div>
+              <div class="col col-40" style="padding: 0">
+                <div class="row" style="padding: 0; width: 100%;">
+                  <div ng-hide="place.isLike" class="wishboard-like-btn col col-md-5" style="margin-right: 3px" ng-click="addLike($event,place.contentid)"><i class="ion-android-favorite-outline"></i><span class="wishboard-like-text"> {{place.likeCnt}}</span></div>
+                  <div ng-show="place.isLike" class="wishboard-unlike-btn col col-md-5" ng-click="addLike($event,place.contentid)"><i class="ion-android-favorite-outline"></i><span class="wishboard-like-text"> {{place.likeCnt}}</span></div>
+                  <div ng-hide="place.isBack" class="wishboard-like-btn col col-md-5"><i class="ion-location"></i><span class="wishboard-like-text"> {{place.backLikeCnt}}</span></div>
+                  <div ng-show="place.isBack" class="wishboard-unlike-btn col col-md-5"><i class="ion-location"></i><span class="wishboard-like-text"> {{place.backLikeCnt}}</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

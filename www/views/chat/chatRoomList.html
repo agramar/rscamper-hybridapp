@@ -1,0 +1,9 @@
+<ion-view view-title="{{location.codeName}}">
+  <ion-content>
+        <ion-list>
+          <ion-item ng-repeat="room in roomList" ng-href="#/chatRoom/{{room.chatRoomInfoNo}}">
+            {{room.chatRoomName}}
+          </ion-item>
+        </ion-list>
+  </ion-content>
+</ion-view>
